@@ -3,6 +3,8 @@ package app.wgxlove.com.doubao;
 import android.app.Application;
 import android.content.Context;
 
+import app.wgxlove.com.doubao.assistTool.MyLogger;
+
 /**
  * Create view by wgx
  *
@@ -18,5 +20,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext=getApplicationContext();
+        MyLogger.openLog(true);
     }
 }

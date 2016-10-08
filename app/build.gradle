@@ -1,19 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-
+apply plugin: 'android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
     defaultConfig {
         applicationId "app.wgxlove.com.doubao"
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -34,4 +27,5 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.github.paolorotolo:appintro:4.0.0'
     compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
