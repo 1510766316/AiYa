@@ -19,10 +19,18 @@ public class LoadingActivity extends BaseActivity {
     private boolean isFirstLoggin = false;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void loadLayout(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_loading);
+    }
+
+    @Override
+    protected void initView() {
         skip();
+    }
+
+    @Override
+    protected void setListener() {
+
     }
 
     private void skip() {

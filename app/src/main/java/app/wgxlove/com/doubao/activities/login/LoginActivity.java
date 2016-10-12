@@ -6,9 +6,19 @@ import android.support.annotation.Nullable;
 import app.wgxlove.com.doubao.activities.BaseActivity;
 
 public class LoginActivity extends BaseActivity {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void loadLayout(@Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void setListener() {
 
     }
 }

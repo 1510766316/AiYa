@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import app.wgxlove.com.doubao.MyApplication;
+import butterknife.ButterKnife;
 
 /**
  * Create view by wgx
@@ -13,11 +14,15 @@ import app.wgxlove.com.doubao.MyApplication;
  *
  * Create at 2016/8/16 11:31
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApplication.mCurrentContext=this;
+        loadLayout(savedInstanceState);
+        ButterKnife.bind(this);
+        initView();
+        setListener();
     }
 
     @Override
@@ -25,4 +30,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
         MyApplication.mCurrentContext=this;
     }
+
+    protected abstract void loadLayout(@Nullable Bundle savedInstanceState);
+    protected abstract void initView();
+    protected abstract void setListener();
 }

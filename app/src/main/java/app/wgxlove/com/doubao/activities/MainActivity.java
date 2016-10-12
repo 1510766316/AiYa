@@ -64,32 +64,12 @@ public class MainActivity extends BaseActivity {
     MineFragment home4;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void loadLayout(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        initView();
-        initViewPager();
     }
-
-    private void initView() {
+    @Override
+    protected void initView() {
         resources = getResources();
-
-        homeLayout = (RelativeLayout) findViewById(R.id.home_layout);
-        jokeLayout = (RelativeLayout) findViewById(R.id.joke_layout);
-        meLayout = (RelativeLayout) findViewById(R.id.me_layout);
-        menuLayout = (RelativeLayout) findViewById(R.id.menu_layout);
-        homeImage = (ImageView) findViewById(R.id.home_image);
-        jokeImage = (ImageView) findViewById(R.id.joke_image);
-        menuImage = (ImageView) findViewById(R.id.menu_image);
-        meImage = (ImageView) findViewById(R.id.me_image);
-        homeText = (TextView) findViewById(R.id.home_text);
-        jokeText = (TextView) findViewById(R.id.joke_text);
-        menuText = (TextView) findViewById(R.id.menu_text);
-        meText = (TextView) findViewById(R.id.me_text);
-    }
-
-    private void initViewPager() {
         home1 = new HomeFragment();
         home2 = new MenuFragment();
         home3 = new JokeFragment();
@@ -98,9 +78,12 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, home1).show(home1)
                 .commit();
         showModule(0);
-
     }
 
+    @Override
+    protected void setListener() {
+
+    }
     private void showModule(int index) {
         switch (index) {
             case 0:
