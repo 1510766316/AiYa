@@ -9,6 +9,10 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+      /*  ndk {
+            moduleName "nativeTest"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }*/
     }
     buildTypes {
         release {
@@ -16,16 +20,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    /*sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }*/
 }
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.orhanobut:logger:1.15'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.github.paolorotolo:appintro:4.0.0'
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-}
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        testCompile 'junit:junit:4.12'
+        compile 'com.android.support:appcompat-v7:24.1.1'
+        compile 'com.google.code.gson:gson:2.7'
+        compile 'com.orhanobut:logger:1.15'
+        compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+        compile 'com.github.paolorotolo:appintro:4.0.0'
+        compile 'com.jakewharton:butterknife:8.4.0'
+        apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    }

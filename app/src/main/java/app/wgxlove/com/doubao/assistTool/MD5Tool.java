@@ -43,7 +43,7 @@ public class MD5Tool {
 
 			messageDigest.update(str.getBytes("UTF-8"));
 		} catch (NoSuchAlgorithmException e) {
-			System.out.println("NoSuchAlgorithmException caught!");
+			MyLogger.e("NoSuchAlgorithmException caught!");
 			System.exit(-1);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

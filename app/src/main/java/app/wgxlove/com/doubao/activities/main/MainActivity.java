@@ -1,4 +1,4 @@
-package app.wgxlove.com.doubao.activities;
+package app.wgxlove.com.doubao.activities.main;
 
 
 import android.content.res.Resources;
@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import app.wgxlove.com.doubao.R;
-import app.wgxlove.com.doubao.fragments.HomeFragment;
-import app.wgxlove.com.doubao.fragments.JokeFragment;
-import app.wgxlove.com.doubao.fragments.MenuFragment;
-import app.wgxlove.com.doubao.fragments.MineFragment;
+import app.wgxlove.com.doubao.activities.BaseActivity;
+import app.wgxlove.com.doubao.activities.main.presenter.MainPresenter;
+import app.wgxlove.com.doubao.activities.main.view.Main;
+import app.wgxlove.com.doubao.fragments.main.HomeFragment;
+import app.wgxlove.com.doubao.fragments.main.JokeFragment;
+import app.wgxlove.com.doubao.fragments.main.MenuFragment;
+import app.wgxlove.com.doubao.fragments.main.MineFragment;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -27,7 +29,7 @@ import butterknife.OnClick;
  * <p>
  * Create at 2016/8/16 11:32
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Main {
     Resources resources;
     @BindView(R.id.home_image)
     ImageView homeImage;
@@ -63,12 +65,17 @@ public class MainActivity extends BaseActivity {
     JokeFragment home3;
     MineFragment home4;
 
+    MainPresenter mainPresenter;
+
     @Override
     protected void loadLayout(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
     }
+
     @Override
     protected void initView() {
+        mainPresenter = new MainPresenter();
+        mainPresenter.initMainPresenter(this);
         resources = getResources();
         home1 = new HomeFragment();
         home2 = new MenuFragment();
@@ -84,13 +91,14 @@ public class MainActivity extends BaseActivity {
     protected void setListener() {
 
     }
+
     private void showModule(int index) {
         switch (index) {
             case 0:
-                homeText.setTextColor(resources.getColor(R.color.light_yellow));
-                jokeText.setTextColor(resources.getColor(R.color.dang_hui));
-                menuText.setTextColor(resources.getColor(R.color.dang_hui));
-                meText.setTextColor(resources.getColor(R.color.dang_hui));
+                homeText.setTextColor(resources.getColor(R.color.color_fea449));
+                jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_huang);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
@@ -98,10 +106,10 @@ public class MainActivity extends BaseActivity {
                 meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 1:
-                homeText.setTextColor(resources.getColor(R.color.dang_hui));
-                jokeText.setTextColor(resources.getColor(R.color.light_yellow));
-                menuText.setTextColor(resources.getColor(R.color.dang_hui));
-                meText.setTextColor(resources.getColor(R.color.dang_hui));
+                homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                jokeText.setTextColor(resources.getColor(R.color.color_fea449));
+                menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_huang);
@@ -109,10 +117,10 @@ public class MainActivity extends BaseActivity {
                 meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 2:
-                homeText.setTextColor(resources.getColor(R.color.dang_hui));
-                jokeText.setTextColor(resources.getColor(R.color.dang_hui));
-                menuText.setTextColor(resources.getColor(R.color.light_yellow));
-                meText.setTextColor(resources.getColor(R.color.dang_hui));
+                homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                menuText.setTextColor(resources.getColor(R.color.color_fea449));
+                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
@@ -120,10 +128,10 @@ public class MainActivity extends BaseActivity {
                 meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 3:
-                homeText.setTextColor(resources.getColor(R.color.dang_hui));
-                jokeText.setTextColor(resources.getColor(R.color.dang_hui));
-                menuText.setTextColor(resources.getColor(R.color.dang_hui));
-                meText.setTextColor(resources.getColor(R.color.light_yellow));
+                homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
+                meText.setTextColor(resources.getColor(R.color.color_fea449));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
@@ -150,6 +158,11 @@ public class MainActivity extends BaseActivity {
                 index = 3;
                 break;
         }
+        mainPresenter.switchFragment(index);
+    }
+
+    @Override
+    public void switcherFragment(int index) {
         if (currentTabIndex != index) {
             FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
             trx.hide(fragments[currentTabIndex]);
@@ -160,5 +173,10 @@ public class MainActivity extends BaseActivity {
         }
         showModule(index);
         currentTabIndex = index;
+    }
+
+    @Override
+    public void refreshFragment(int index) {
+
     }
 }

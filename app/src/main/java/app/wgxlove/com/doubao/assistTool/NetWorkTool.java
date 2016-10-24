@@ -55,7 +55,7 @@ public class NetWorkTool {
                     || subType == TelephonyManager.NETWORK_TYPE_EVDO_A || subType == TelephonyManager.NETWORK_TYPE_EVDO_0
                     || subType == TelephonyManager.NETWORK_TYPE_EVDO_B) {
                 type = "3g";
-            } else if (subType == TelephonyManager.NETWORK_TYPE_LTE) {// LTE��3g��4g�Ĺ��ɣ���3.9G��ȫ���׼
+            } else if (subType == TelephonyManager.NETWORK_TYPE_LTE) {
                 type = "4g";
             }
         }

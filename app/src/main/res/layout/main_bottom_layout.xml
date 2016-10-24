@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home"
-                    android:textColor="@color/dang_hui"
+                    android:textColor="@color/color_8a8a8a"
                     android:textSize="@dimen/text_size_12" />
             </LinearLayout>
         </RelativeLayout>
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/joke"
-                    android:textColor="@color/dang_hui"
+                    android:textColor="@color/color_8a8a8a"
                     android:textSize="@dimen/text_size_12" />
             </LinearLayout>
         </RelativeLayout>
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/menu"
-                    android:textColor="@color/dang_hui"
+                    android:textColor="@color/color_8a8a8a"
                     android:textSize="@dimen/text_size_12" />
             </LinearLayout>
         </RelativeLayout>
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/me"
-                    android:textColor="@color/dang_hui"
+                    android:textColor="@color/color_8a8a8a"
                     android:textSize="@dimen/text_size_12" />
             </LinearLayout>
         </RelativeLayout>

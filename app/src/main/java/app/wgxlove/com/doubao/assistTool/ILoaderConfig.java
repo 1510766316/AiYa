@@ -22,6 +22,11 @@ import java.io.File;
  */
 public class ILoaderConfig {
 
+    /**
+     * 初始化ImageLoader
+     * @param context
+     * @param flag
+     */
     public static void initImageLoader(Context context,boolean flag) {
         File file = new File(StorageTool.getStorageFile(), VariableTool.IMAGE_ACHE_DIRECTORY);
         if (!file.exists()) {
@@ -38,7 +43,27 @@ public class ILoaderConfig {
         ImageLoader.getInstance().init(config.build());
     }
 
+    /**
+     * Acceptable URIs examples
+     *
+     * "http://site.com/image.png" // from Web
+     * "file:///mnt/sdcard/image.png" // from SD card
+     * "file:///mnt/sdcard/video.mp4" // from SD card (video thumbnail)
+     * "content://media/external/images/media/13" // from content provider
+     * "content://media/external/video/media/13" // from content provider (video thumbnail)
+     * "assets://image.png" // from assets
+     * "drawable://" + R.drawable.img // from drawables (non-9patch images)
+     */
 
+
+    /**
+     * 加载图片的参数设置
+     * @param loadingImg
+     * @param emptyImg
+     * @param errorImg
+     * @param roundedNum
+     * @return
+     */
     public  static DisplayImageOptions option(int loadingImg,int emptyImg,int errorImg,int roundedNum){
 
         DisplayImageOptions options=new DisplayImageOptions.Builder()
@@ -46,7 +71,7 @@ public class ILoaderConfig {
                 .showImageForEmptyUri(emptyImg)  // 设置图片Uri为空或是错误的时候显示的图片
                 .showImageOnFail(errorImg)       // 设置图片加载或解码过程中发生错误显示的图片
                 .cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中
-                .cacheOnDisc(true)                          // 设置下载的图片是否缓存在SD卡中
+                .cacheOnDisc(true)                          // 设置下载的图片是否
                 .displayer(new RoundedBitmapDisplayer(roundedNum))  // 设置成圆角图片
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)

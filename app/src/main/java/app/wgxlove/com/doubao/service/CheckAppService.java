@@ -1,13 +1,25 @@
 package app.wgxlove.com.doubao.service;
 
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
+import android.widget.RemoteViews;
 
 import java.util.List;
+
+import app.wgxlove.com.doubao.R;
+import app.wgxlove.com.doubao.activities.main.MainActivity;
+import app.wgxlove.com.doubao.assistTool.MyLogger;
 
 /**
  * Create view by wgx
@@ -18,16 +30,46 @@ import java.util.List;
  */
 public class CheckAppService extends Service {
 
+    private CheckBinder checkBinder;
+
+    private static final int NOTIFICATION_ID = 1; // 如果id设置为0,会导致不能设置为前台service
+    /**
+     * Called by the system when the service is first created.  Do not call this method directly.
+     */
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        checkBinder=new CheckBinder();
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return checkBinder;
+    }
+
+    public  class CheckBinder extends Binder {
+        public CheckAppService getService() {
+            return CheckAppService.this;
+        }
+    }
+
+    public void showNote(){
+        Notification.Builder builder = new Notification.Builder(this);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, MainActivity.class), 0);
+        builder.setContentIntent(contentIntent);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setTicker("Foreground Service Start");
+        builder.setContentTitle("Foreground Service");
+        builder.setContentText("Make this service run in the foreground.");
+        Notification notification = builder.build();
+        startForeground(NOTIFICATION_ID, notification);
     }
 
     /**
@@ -51,7 +93,7 @@ public class CheckAppService extends Service {
 
     /**
      * @Describe 检测App状态
-     *
+     * <p>
      * Create at 2016/9/10 15:34
      */
     public interface checkApp {
@@ -60,7 +102,7 @@ public class CheckAppService extends Service {
 
     /**
      * @Describe 更新App
-     *
+     * <p>
      * Create at 2016/9/10 15:34
      */
     public interface downApp {

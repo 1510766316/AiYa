@@ -7,21 +7,15 @@ import com.orhanobut.logger.Logger;
  * Create view by wgx
  *
  * @Describe debug调试工具
- *
+ * <p>
  * Create at 2016/9/10 16:07
  */
 public class MyLogger {
 
-    private static boolean debugFlag = false;
+    private static boolean debugFlag = true;
 
-    /**
-     * @Describe 是否打开日志
-     *
-     * Create at 2016/9/10 16:19
-     */
-    public static void openLog(boolean flag) {
-        debugFlag = flag;
-        if (flag)
+    {
+        if (debugFlag)
             Logger.init(DeviceTool.getAppName());
     }
 
@@ -34,14 +28,17 @@ public class MyLogger {
         if (debugFlag)
             Logger.e(msg);
     }
+
     public static void i(String msg) {
         if (debugFlag)
             Logger.i(msg);
     }
+
     public static void d(String msg) {
         if (debugFlag)
             Logger.d(msg);
     }
+
     public static void v(String msg) {
         if (debugFlag)
             Logger.v(msg);

@@ -12,9 +12,9 @@ import com.orhanobut.logger.Logger;
 
 /** 
  * @ClassName StorageTool
- * @Description  �洢������
+ * @Description
  * @author wgx
- * @date  2016��3��30�� ����12:03:12  
+ * @date
  */
 public class StorageTool {
 
