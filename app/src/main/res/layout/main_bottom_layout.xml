@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:background="@android:color/white"
-    android:layout_height="@dimen/height_56">
+    android:layout_height="@dimen/main_tab_height">
 
         <RelativeLayout
             android:id="@+id/home_layout"
@@ -18,8 +18,8 @@
 
                 <ImageView
                     android:id="@+id/home_image"
-                    android:layout_width="25sp"
-                    android:layout_height="25sp"
+                    android:layout_width="@dimen/main_tab_iv_width"
+                    android:layout_height="@dimen/main_tab_iv_height"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/home_hui" />
 
@@ -30,7 +30,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home"
                     android:textColor="@color/color_8a8a8a"
-                    android:textSize="@dimen/text_size_12" />
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -48,8 +48,8 @@
 
                 <ImageView
                     android:id="@+id/joke_image"
-                    android:layout_width="25sp"
-                    android:layout_height="25sp"
+                    android:layout_width="@dimen/main_tab_iv_width"
+                    android:layout_height="@dimen/main_tab_iv_height"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/joke_hui" />
 
@@ -60,7 +60,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/joke"
                     android:textColor="@color/color_8a8a8a"
-                    android:textSize="@dimen/text_size_12" />
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -78,8 +78,8 @@
 
                 <ImageView
                     android:id="@+id/menu_image"
-                    android:layout_width="25sp"
-                    android:layout_height="25sp"
+                    android:layout_width="@dimen/main_tab_iv_width"
+                    android:layout_height="@dimen/main_tab_iv_height"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/menu_hui" />
 
@@ -90,7 +90,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/menu"
                     android:textColor="@color/color_8a8a8a"
-                    android:textSize="@dimen/text_size_12" />
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -108,8 +108,8 @@
 
                 <ImageView
                     android:id="@+id/me_image"
-                    android:layout_width="25sp"
-                    android:layout_height="25sp"
+                    android:layout_width="@dimen/main_tab_iv_width"
+                    android:layout_height="@dimen/main_tab_iv_height"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/touxiang_hui" />
 
@@ -120,7 +120,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/me"
                     android:textColor="@color/color_8a8a8a"
-                    android:textSize="@dimen/text_size_12" />
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

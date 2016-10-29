@@ -3,8 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="color_2196F3">#2196F3</color>
 
+    <color name="color_2196F3">#2196F3</color>
     <color name="color_fea449">#FEA449</color>
     <color name="color_8a8a8a">#8A8A8A</color>
     <color name="color_f0f0f0">#f0f0f0</color>
@@ -12,7 +12,9 @@
     <color name="color_ffffff">#FFFFFF</color>
     <color name="color_0000">#0000</color>
     <color name="color_8888">#8888</color>
+    <color name="color_2000">#2000</color>
     <color name="color_000000">#000000</color>
+    <color name="color_333">#333</color>
     <color name="color_5a5a5a">#5a5a5a</color>
     <color name="color_999999">#999999</color>
     <color name="color_cccccc">#cccccc</color>

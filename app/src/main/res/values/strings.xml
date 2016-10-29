@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">豆宝</string>
+    <string name="app_name">AI芽</string>
     <!-- 通用 -->
-    <string name="goback">返回</string>
-    <string name="cancle">取消</string>
+    <string name="goBack">返回</string>
+    <string name="cancel">取消</string>
     <string name="confirm">确定</string>
     <string name="set">设置</string>
     <string name="set_change">修改</string>

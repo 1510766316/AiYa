@@ -1,31 +1,14 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="height_15">15dp</dimen>
-    <dimen name="height_20">20dp</dimen>
-    <dimen name="height_40">40dp</dimen>
-    <dimen name="height_45">45dp</dimen>
-    <dimen name="height_50">50dp</dimen>
-    <dimen name="height_56">56dp</dimen>
-    <dimen name="height_60">60dp</dimen>
-    <dimen name="height_70">70dp</dimen>
-    <dimen name="height_120">120dp</dimen>
-    <dimen name="height_140">140dp</dimen>
-    <dimen name="height_160">160dp</dimen>
-    <dimen name="height_180">180dp</dimen>
-    <dimen name="height_200">200dp</dimen>
-
-    <dimen name="text_size_28">28sp</dimen>
-    <dimen name="text_size_23">23sp</dimen>
-    <dimen name="text_size_20">20sp</dimen>
-    <dimen name="text_size_18">18sp</dimen>
-    <dimen name="text_size_16">16sp</dimen>
-    <dimen name="text_size_14">14sp</dimen>
-    <dimen name="text_size_12">12sp</dimen>
-    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_big">16sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
 
     <dimen name="banner_height">25dp</dimen>
-    <dimen name="banner_margin_bottom">30dp</dimen>
+    <dimen name="banner_view_height">240dp</dimen>
+    <dimen name="banner_point_height">200dp</dimen>
     <dimen name="banner_padding_left">8dp</dimen>
+
+    <dimen name="main_tab_iv_width">25dp</dimen>
+    <dimen name="main_tab_iv_height">25dp</dimen>
+    <dimen name="main_tab_height">56dp</dimen>
 </resources>

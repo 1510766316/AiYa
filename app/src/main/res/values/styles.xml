@@ -10,5 +10,7 @@
         <item name="windowActionBar">false</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base"></style>
+    <style name="AppTheme" parent="AppTheme.Base">
+
+    </style>
 </resources>
