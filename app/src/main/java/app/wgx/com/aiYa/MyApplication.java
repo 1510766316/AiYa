@@ -5,6 +5,11 @@ import android.content.Context;
 
 import com.aspsine.multithreaddownload.DownloadConfiguration;
 import com.aspsine.multithreaddownload.DownloadManager;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Create view by wgx
@@ -101,4 +106,16 @@ public class MyApplication extends Application {
 //delete
     DownloadManager.getInstance().delete(tag);
    **************/
+
+    /**
+     * 初始化okHttpUtils
+     */
+    private void initOkHttp(){
+        OkHttpClient okHttpClient=new OkHttpClient.Builder()
+                .connectTimeout(1000*10L, TimeUnit.MILLISECONDS)
+                .readTimeout(1000*10L,TimeUnit.MILLISECONDS)
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
+
+    }
 }

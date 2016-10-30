@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AiYa.iml" filepath="$PROJECT_DIR$/AiYa.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/httpdownload/httpdownload.iml" filepath="$PROJECT_DIR$/httpdownload/httpdownload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/httpdownload/httpdownload.iml" filepath="$PROJECT_DIR$/httpdownload/httpdownload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/okhttputils/okhttputils.iml" filepath="$PROJECT_DIR$/okhttputils/okhttputils.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttputils/okhttputils.iml" filepath="$PROJECT_DIR$/okhttputils/okhttputils.iml" />
     </modules>
   </component>
