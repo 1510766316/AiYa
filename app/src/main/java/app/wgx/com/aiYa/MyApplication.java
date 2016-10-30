@@ -26,7 +26,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-
+        initOkHttp();
     }
 
 
@@ -112,8 +112,8 @@ public class MyApplication extends Application {
      */
     private void initOkHttp(){
         OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .connectTimeout(1000*10L, TimeUnit.MILLISECONDS)
-                .readTimeout(1000*10L,TimeUnit.MILLISECONDS)
+                .connectTimeout(1000*8L, TimeUnit.MILLISECONDS)
+                .readTimeout(1000*8L,TimeUnit.MILLISECONDS)
                 .build();
         OkHttpUtils.initClient(okHttpClient);
 

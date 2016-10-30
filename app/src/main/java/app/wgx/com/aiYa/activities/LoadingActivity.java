@@ -26,7 +26,7 @@ public class LoadingActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        skip();
     }
 
     @Override

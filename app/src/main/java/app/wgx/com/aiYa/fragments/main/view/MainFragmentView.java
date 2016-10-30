@@ -7,8 +7,6 @@ import okhttp3.Call;
  */
 
 public interface MainFragmentView {
-    void refreshView(int index);
-    void showFailureView();
     void start();
     void progress(long totalSize,float progress);
     void error(Call call,String msg);

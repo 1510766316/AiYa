@@ -1,9 +1,21 @@
 package app.wgx.com.aiYa.callback;
 
-/**
- * Created by wugx on 16-10-30.
- */
+import com.zhy.http.okhttp.callback.Callback;
 
-public interface HttpCallBack {
+import java.io.IOException;
+
+import app.wgx.com.aiYa.assistTool.MyLogger;
+import okhttp3.Response;
+
+/**
+ * 自定义Callback
+ */
+public abstract class HttpCallBack extends Callback<String> {
+    @Override
+    public String parseNetworkResponse(Response response, int id) throws IOException {
+        String result = response.body().string();
+        MyLogger.json(result);
+        return result;
+    }
 
 }

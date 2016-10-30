@@ -4,11 +4,13 @@
     <dimen name="text_size_small">12sp</dimen>
 
     <dimen name="banner_height">25dp</dimen>
-    <dimen name="banner_view_height">240dp</dimen>
+    <dimen name="banner_view_height">160dp</dimen>
     <dimen name="banner_point_height">200dp</dimen>
     <dimen name="banner_padding_left">8dp</dimen>
 
     <dimen name="main_tab_iv_width">25dp</dimen>
     <dimen name="main_tab_iv_height">25dp</dimen>
     <dimen name="main_tab_height">56dp</dimen>
+
+    <dimen name="home_kind_height">80dp</dimen>
 </resources>
