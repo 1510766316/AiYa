@@ -15,7 +15,7 @@ public class DBOpenHelp extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table if not exists  "+DBConstant.HOMNE_BANNER_TAB
+        db.execSQL("create table if not exists  "+DBConstant.HOME_BANNER_TAB
                 +"(_id integer primary key autoincrement not null,"
                 +"id integer not null,"
                 +"serverUrl text not null,"

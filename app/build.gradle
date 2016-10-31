@@ -42,4 +42,5 @@ dependencies {
     compile 'com.github.k0shk0sh:PermissionHelper:1.1.0'
     compile project(':httpdownload')
     compile project(':okhttputils')
+    compile 'com.github.wenmingvs:LogReport:1.0.3'
 }

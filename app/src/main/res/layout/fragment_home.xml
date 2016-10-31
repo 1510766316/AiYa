@@ -4,10 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -24,9 +21,10 @@
                 android:layout_height="@dimen/banner_view_height" />
 
             <LinearLayout
-                android:layout_below="@id/banner"
+                android:id="@+id/switchLL"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/home_kind_height">
+                android:layout_height="@dimen/home_kind_height"
+                android:layout_below="@id/banner">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -43,7 +41,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@null"
-                            android:src="@mipmap/home_huang" />
+                            android:src="@mipmap/ic_launcher" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -71,7 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@null"
-                            android:src="@mipmap/menu_huang" />
+                            android:src="@mipmap/ic_launcher" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -99,7 +97,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@null"
-                            android:src="@mipmap/menu_huang" />
+                            android:src="@mipmap/ic_launcher" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -111,8 +109,14 @@
                             android:textSize="@dimen/text_size_normal" />
                     </RelativeLayout>
                 </RelativeLayout>
-
             </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/switchLL" />
+
 
         </RelativeLayout>
     </ScrollView>

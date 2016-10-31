@@ -1,19 +1,17 @@
 package app.wgx.com.aiYa.fragments.main.presenter;
 
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import app.wgx.com.aiYa.assistTool.JsonTool;
 import app.wgx.com.aiYa.assistTool.MyLogger;
 import app.wgx.com.aiYa.bean.HomeBannerInfo;
 import app.wgx.com.aiYa.callback.HttpCallBack;
-import app.wgx.com.aiYa.dataBase.SQLiteUtil;
+import app.wgx.com.aiYa.callback.HttpResponseCallBack;
 import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
+import app.wgx.com.aiYa.httpTool.AsyncHttp;
 import okhttp3.Call;
 import okhttp3.Request;
 
@@ -35,26 +33,31 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadBanner(String url, Map<String, String> map) {
-        OkHttpUtils.get()
-                .url(url)
-                .build().execute(new HttpCallBack() {
+        AsyncHttp.getInstance().setHttpParams(url, map, new HttpResponseCallBack() {
             @Override
-            public void onError(Call call, Exception e, int id) {
-                call.cancel();
-                MyLogger.e(e.getMessage().toString());
+            public void start() {
+
             }
 
             @Override
-            public void onResponse(String response, int id) {
-                Gson gson = new Gson();
-                List<HomeBannerInfo.ResultBean> resultBeen;
-                resultBeen =( List<HomeBannerInfo.ResultBean> )gson.fromJson(response, new TypeToken<List<HomeBannerInfo.ResultBean>>() {
-                }.getRawType());
+            public void progress(long totalSize, float progress) {
 
-                for (HomeBannerInfo.ResultBean bean : resultBeen){
-                    MyLogger.e(bean.getCreateTime());
-                 //   SQLiteUtil.getInstance().saveBanner(bean);
-                }
+            }
+
+            @Override
+            public void error(String msg) {
+
+            }
+
+            @Override
+            public void success(String result) {
+                HomeBannerInfo info= JsonTool.jsonToBean(result,HomeBannerInfo.class);
+                MyLogger.i(info.getMsg());
+            }
+
+            @Override
+            public void finish() {
+
             }
         });
     }

@@ -5,7 +5,7 @@ package app.wgx.com.aiYa.dataBase;
  */
 public class DBConstant {
 
-    public static final String DB_NAME="aiya.db";
+    public static final String DB_NAME="aiYa.db";
 
-    public static final String HOMNE_BANNER_TAB="tab_home_banner";
+    public static final String HOME_BANNER_TAB="tab_home_banner";
 }

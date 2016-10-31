@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.wgx.com.aiYa.MyApplication;
-import app.wgx.com.aiYa.assistTool.DeviceTool;
 import app.wgx.com.aiYa.assistTool.FileTool;
-import app.wgx.com.aiYa.assistTool.StorageTool;
+import app.wgx.com.aiYa.assistTool.VariableTool;
 import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 /**
@@ -27,7 +26,7 @@ public class SQLiteUtil {
 
     private static SQLiteDatabase mReadWriteDataBase;
 
-    private static String db_path = StorageTool.getStorageFile().getAbsolutePath() + "/" + DeviceTool.getAppName() + "/" + DBConstant.DB_NAME;
+    private static String db_path = VariableTool.DB_SAVE_DIRECTORY + "/" + DBConstant.DB_NAME;
 
     /**
      * @return 获取SQLiteUtil 单例
@@ -66,7 +65,7 @@ public class SQLiteUtil {
      */
     public boolean isExistBanner(String id) {
         boolean flag = false;
-        Cursor cursor = mReadWriteDataBase.query(DBConstant.HOMNE_BANNER_TAB, null,
+        Cursor cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null,
                 "id=?", new String[]{id}, null, null,
                 null);
         if (cursor != null && cursor.getCount() > 0) {
@@ -89,7 +88,7 @@ public class SQLiteUtil {
             contentValues.put("is_enabled", "1");
         else
             contentValues.put("is_enabled", "0");
-        mReadWriteDataBase.update(DBConstant.HOMNE_BANNER_TAB, contentValues,
+        mReadWriteDataBase.update(DBConstant.HOME_BANNER_TAB, contentValues,
                 "id=?", new String[]{id});
 
     }
@@ -103,10 +102,10 @@ public class SQLiteUtil {
         List<HomeBannerInfo.ResultBean> list = new ArrayList<>();
         Cursor cursor;
         if (status)
-            cursor = mReadWriteDataBase.query(DBConstant.HOMNE_BANNER_TAB, null, "is_enabled=1",
+            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "is_enabled=1",
                     null, null, null, "_id DESC");
         else
-            cursor = mReadWriteDataBase.query(DBConstant.HOMNE_BANNER_TAB, null, "is_enabled=0",
+            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "is_enabled=0",
                     null, null, null, "_id DESC");
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
@@ -144,7 +143,7 @@ public class SQLiteUtil {
             values.put("endTime", info.getEndTime());
             values.put("updateTime", info.getUpdateTime());
             values.put("is_enabled", info.getIs_enabled());
-            mReadWriteDataBase.insert(DBConstant.HOMNE_BANNER_TAB, null, values);
+            mReadWriteDataBase.insert(DBConstant.HOME_BANNER_TAB, null, values);
         }
     }
 
@@ -156,7 +155,7 @@ public class SQLiteUtil {
     public void deleteBanner(String id) {
         mReadWriteDataBase.beginTransaction();
         if (isExistBanner(id))
-            mReadWriteDataBase.delete(DBConstant.HOMNE_BANNER_TAB, "id=?",
+            mReadWriteDataBase.delete(DBConstant.HOME_BANNER_TAB, "id=?",
                     new String[]{id});
         mReadWriteDataBase.setTransactionSuccessful();// 事务结束
         mReadWriteDataBase.endTransaction();// 释放事务
@@ -167,6 +166,6 @@ public class SQLiteUtil {
      * 删除表
      */
     public void clearDB() {
-        mReadWriteDataBase.execSQL("delete from " + DBConstant.HOMNE_BANNER_TAB);
+        mReadWriteDataBase.execSQL("delete from " + DBConstant.HOME_BANNER_TAB);
     }
 }

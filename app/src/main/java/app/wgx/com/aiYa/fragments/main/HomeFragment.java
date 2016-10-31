@@ -17,20 +17,21 @@ import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
 import okhttp3.Call;
 
 
-public class HomeFragment extends BaseFragment implements MainFragmentView{
+public class HomeFragment extends BaseFragment implements MainFragmentView {
 
     MainFragmentPresenter mainFragmentPresenter;
+
     @Override
     protected View initLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     protected void initView(View view) {
-        mainFragmentPresenter=new MainFragmentPresenter(this);
-        Map<String,String> map=new HashMap<>();
-        map.put("user","123456");
-        mainFragmentPresenter.loadBanner(HttpConstant.HOME_BANNER_URL,map);
+        mainFragmentPresenter = new MainFragmentPresenter(this);
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", "123456");
+        mainFragmentPresenter.loadBanner(HttpConstant.HOME_BANNER_URL, map);
     }
 
     @Override

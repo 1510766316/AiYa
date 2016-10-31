@@ -4,6 +4,7 @@ import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.IOException;
 
+import app.wgx.com.aiYa.assistTool.JsonTool;
 import app.wgx.com.aiYa.assistTool.MyLogger;
 import okhttp3.Response;
 
@@ -15,6 +16,7 @@ public abstract class HttpCallBack extends Callback<String> {
     public String parseNetworkResponse(Response response, int id) throws IOException {
         String result = response.body().string();
         MyLogger.json(result);
+        String sss= (String) JsonTool.getKeyValue(result,"msg");
         return result;
     }
 

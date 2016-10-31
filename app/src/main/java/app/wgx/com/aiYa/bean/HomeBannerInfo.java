@@ -6,6 +6,7 @@ import java.util.List;
  * 首页fragment 轮播图
  */
 public class HomeBannerInfo {
+
     /**
      * reason : success
      * msg : 获取数据成功
@@ -117,24 +118,24 @@ public class HomeBannerInfo {
             return createTime;
         }
 
-        public void setCreateTime(String createtime) {
-            this.createTime = createtime;
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
         }
 
         public String getEndTime() {
             return endTime;
         }
 
-        public void setEndTime(String endtime) {
-            this.endTime = endtime;
+        public void setEndTime(String endTime) {
+            this.endTime = endTime;
         }
 
         public String getUpdateTime() {
             return updateTime;
         }
 
-        public void setUpdateTime(String updatetime) {
-            this.updateTime = updatetime;
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
         }
 
         public String getIs_enabled() {

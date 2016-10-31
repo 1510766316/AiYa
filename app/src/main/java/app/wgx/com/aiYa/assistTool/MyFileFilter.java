@@ -8,31 +8,26 @@ import java.util.List;
 
 public class MyFileFilter implements FilenameFilter {
 
-	private List<String> extensions = new ArrayList<String>();
+    private List<String> extensions = new ArrayList<String>();
 
-	public MyFileFilter(String... extensions)
-	{
+    public MyFileFilter(String... extensions) {
 
-		for(String extension:extensions)
-		{
-			this.extensions.add(extension);
-		}
-	}
+        for (String extension : extensions) {
+            this.extensions.add(extension);
+        }
+    }
 
-	@Override
-	public boolean accept(File dir, String filename)
-	{
+    @Override
+    public boolean accept(File dir, String filename) {
 
-		// TODO Auto-generated method stub
-		boolean flag = false;
-		for(String extension:extensions)
-		{
-			if(filename.endsWith(extension))
-			{
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
+        // TODO Auto-generated method stub
+        boolean flag = false;
+        for (String extension : extensions) {
+            if (filename.endsWith(extension)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
 }

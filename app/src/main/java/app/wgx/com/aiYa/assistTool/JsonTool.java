@@ -1,408 +1,111 @@
 package app.wgx.com.aiYa.assistTool;
 
-import org.json.JSONArray;
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * json 数据解析
+ */
 public class JsonTool {
-
-    private static boolean isPrintException = true;
-
-    /******************************* Long ******************************/
     /**
-     * 获取json里面的某个Long类型的值
+     * 把一个map变成json字符串
      *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
+     * @param map 封装了数据的map集合
+     * @return 数据对应的Json字符串形式
      */
-    public static Long getLong(JSONObject jsonObject, String key, Long defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
+    public static String parseMapToJson(Map<?, ?> map) {
         try {
-            return jsonObject.getLong(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
+            Gson gson = new Gson();
+            return gson.toJson(map);
+        } catch (Exception e) {
+            MyLogger.e(e.getMessage().toString());
         }
+        return "";
     }
 
-    public static Long getLong(String jsonData, String key, Long defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
 
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getLong(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static long getLong(JSONObject jsonObject, String key, long defaultValue) {
-        return getLong(jsonObject, key, (Long) defaultValue);
-    }
-
-    public static long getLong(String jsonData, String key, long defaultValue) {
-        return getLong(jsonData, key, (Long) defaultValue);
-    }
-
-    /******************************* Int ******************************/
     /**
-     * 获取json里面的某个int类型的值
+     * 将一个json字符串转换成指定的JavaBean对象
      *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
+     * @param json 需要转换的json字符串
+     * @param cls  json字符串对应的JavBean
+     * @param <T>  指定的数据类型
+     * @return 封装好数据的JavaBean对象
      */
-    public static Integer getInt(JSONObject jsonObject, String key, Integer defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
+    public static <T> T jsonToBean(String json, Class<T> cls) {
+        Gson gson = new Gson();
+        T t = null;
         try {
-            return jsonObject.getInt(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
+            t = gson.fromJson(json, cls);
+        } catch (Exception e) {
+            MyLogger.e(e.getMessage().toString());
         }
-    }
-
-    public static Integer getInt(String jsonData, String key, Integer defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getInt(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static int getInt(JSONObject jsonObject, String key, int defaultValue) {
-        return getInt(jsonObject, key, (Integer) defaultValue);
-    }
-
-    public static int getInt(String jsonData, String key, int defaultValue) {
-        return getInt(jsonData, key, (Integer) defaultValue);
-    }
-
-    /******************************* Double ******************************/
-    /**
-     * 获取json里面的某个Double类型的值
-     *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static Double getDouble(JSONObject jsonObject, String key, Double defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
-        try {
-            return jsonObject.getDouble(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static Double getDouble(String jsonData, String key, Double defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getDouble(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static double getDouble(JSONObject jsonObject, String key, double defaultValue) {
-        return getDouble(jsonObject, key, (Double) defaultValue);
-    }
-
-    public static double getDouble(String jsonData, String key, double defaultValue) {
-        return getDouble(jsonData, key, (Double) defaultValue);
-    }
-
-    /******************************* String ******************************/
-    /**
-     * 获取json里面的某个String类型的值
-     *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static String getString(JSONObject jsonObject, String key, String defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
-        try {
-            return jsonObject.getString(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static String getString(String jsonData, String key, String defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getString(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    /******************************* JSONObject ******************************/
-    /**
-     * 获取json里面的某个JSONObject类型的值
-     *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static JSONObject getJSONObject(JSONObject jsonObject, String key, JSONObject defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
-        try {
-            return jsonObject.getJSONObject(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static JSONObject getJSONObject(String jsonData, String key, JSONObject defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getJSONObject(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    /******************************* JSONArray ******************************/
-    /**
-     * 获取json里面的某个JSONArray类型的值
-     *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static JSONArray getJSONArray(JSONObject jsonObject, String key, JSONArray defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
-        try {
-            return jsonObject.getJSONArray(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static JSONArray getJSONArray(String jsonData, String key, JSONArray defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getJSONArray(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    /******************************* boolean ******************************/
-    /**
-     * 获取json里面的某个boolean类型的值
-     *
-     * @param jsonObject
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static boolean getBoolean(JSONObject jsonObject, String key, Boolean defaultValue) {
-        if (jsonObject == null || StringTool.isEmpty(key)) {
-            return defaultValue;
-        }
-
-        try {
-            return jsonObject.getBoolean(key);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
-    }
-
-    public static boolean getBoolean(String jsonData, String key, Boolean defaultValue) {
-        if (StringTool.isEmpty(jsonData)) {
-            return defaultValue;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getBoolean(jsonObject, key, defaultValue);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
+        return t;
     }
 
     /**
-     * jsonObject过滤key再转Map
+     * 把json字符串变成map形式
      *
-     * @param jsonObject
-     * @param key
-     * @return
+     * @param json 需要转换的Json
+     * @return map封装的数据
      */
-    public static Map<String, String> getMap(JSONObject jsonObject, String key) {
-        return JsonTool.parseKeyAndValueToMap(JsonTool.getString(jsonObject, key, null));
+    public static HashMap<String, Object> parseJsonToMap(String json) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<HashMap<String, Object>>() {
+        }.getType();
+        HashMap<String, Object> map = null;
+        try {
+            map = gson.fromJson(json, type);
+        } catch (Exception e) {
+            MyLogger.e(e.getMessage().toString());
+        }
+        return map;
+    }
+
+
+    /**
+     * 把json字符串变成集合<br>
+     * 参数示例：new TypeToken&lt;List&lt;YourBean&gt;&gt;(){}.getType()
+     *
+     * @param json 需要转换的Json字符串
+     * @param type 示例：new TypeToken&lt;List&lt;YourBean&gt;&gt;(){}.getType()
+     * @return 数据集合
+     */
+    public static List<?> parseJsonToList(String json, Type type) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, type);
     }
 
     /**
-     * json过滤key再转Map
+     * 获取json串中某个字段的值，注意，只能获取同一层级的value
      *
-     * @param jsonData
-     * @param key
-     * @return
+     * @param json json字符串
+     * @param key  json中下一级的bean
+     * @return key对应的值
      */
-    public static Map<String, String> getMap(String jsonData, String key) {
-
-        if (jsonData == null) {
+    public static Object getKeyValue(String json, String key) {
+        if (TextUtils.isEmpty(json))
             return null;
-        }
-        if (jsonData.length() == 0) {
-            return new HashMap<String, String>();
-        }
-
+        if (!json.contains(key))
+            return "";
+        JSONObject jsonObject;
+        Object value = null;
         try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return getMap(jsonObject, key);
+            jsonObject = new JSONObject(json);
+            value = jsonObject.get(key);
         } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return null;
+            MyLogger.e(e.getMessage().toString());
         }
+        return value;
     }
 
-    /**
-     * jsonObject转Map
-     *
-     * @param sourceObj
-     * @return
-     */
-    @SuppressWarnings("rawtypes")
-    public static Map<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
-        if (sourceObj == null) {
-            return null;
-        }
-
-        Map<String, String> keyAndValueMap = new HashMap<String, String>();
-        for (Iterator iter = sourceObj.keys(); iter.hasNext(); ) {
-            String key = (String) iter.next();
-            putMapNotEmptyKey(keyAndValueMap, key, getString(sourceObj, key, ""));
-
-        }
-        return keyAndValueMap;
-    }
-
-    /**
-     * json 转 Map
-     *
-     * @param source
-     * @return
-     */
-    public static Map<String, String> parseKeyAndValueToMap(String source) {
-        if (StringTool.isEmpty(source)) {
-            return null;
-        }
-
-        try {
-            JSONObject jsonObject = new JSONObject(source);
-            return parseKeyAndValueToMap(jsonObject);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    public static boolean putMapNotEmptyKey(Map<String, String> map, String key, String value) {
-        if (map == null || StringTool.isEmpty(key)) {
-            return false;
-        }
-
-        map.put(key, value);
-        return true;
-    }
 }

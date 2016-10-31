@@ -6,7 +6,7 @@ package app.wgx.com.aiYa.commonTool;
 public class HttpConstant {
     public static final String BASE_URL="http://192.168.1.102:80/apptwo/api.php?";
 
-    public static final String test="http://192.168.1.102:80/apptwo/test.php";
+    public static final String test="http://www.beanbean.top/apptwo/api.php?doubao=lunbo";
 
     /**
      * 首页轮播图
