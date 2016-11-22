@@ -49,10 +49,6 @@ public class MainActivity extends BaseActivity implements Main {
     TextView menuText;
     @BindView(R.id.menu_layout)
     RelativeLayout menuLayout;
-    @BindView(R.id.me_image)
-    ImageView meImage;
-    @BindView(R.id.me_text)
-    TextView meText;
     @BindView(R.id.me_layout)
     RelativeLayout meLayout;
     @BindView(R.id.fragment_container)
@@ -63,7 +59,6 @@ public class MainActivity extends BaseActivity implements Main {
     HomeFragment home1;
     MenuFragment home2;
     JokeFragment home3;
-    MineFragment home4;
 
     MainPresenter mainPresenter;
 
@@ -80,8 +75,7 @@ public class MainActivity extends BaseActivity implements Main {
         home1 = new HomeFragment();
         home2 = new MenuFragment();
         home3 = new JokeFragment();
-        home4 = new MineFragment();
-        fragments = new Fragment[]{home1, home2, home3, home4};
+        fragments = new Fragment[]{home1, home2, home3};
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, home1).show(home1)
                 .commit();
         showModule(0);
@@ -98,45 +92,37 @@ public class MainActivity extends BaseActivity implements Main {
                 homeText.setTextColor(resources.getColor(R.color.color_fea449));
                 jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
-                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_huang);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
                 menuImage.setBackgroundResource(R.mipmap.menu_hui);
-                meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 1:
                 homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 jokeText.setTextColor(resources.getColor(R.color.color_fea449));
                 menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
-                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_huang);
                 menuImage.setBackgroundResource(R.mipmap.menu_hui);
-                meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 2:
                 homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 menuText.setTextColor(resources.getColor(R.color.color_fea449));
-                meText.setTextColor(resources.getColor(R.color.color_8a8a8a));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
                 menuImage.setBackgroundResource(R.mipmap.menu_huang);
-                meImage.setBackgroundResource(R.mipmap.touxiang_hui);
                 break;
             case 3:
                 homeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 jokeText.setTextColor(resources.getColor(R.color.color_8a8a8a));
                 menuText.setTextColor(resources.getColor(R.color.color_8a8a8a));
-                meText.setTextColor(resources.getColor(R.color.color_fea449));
 
                 homeImage.setBackgroundResource(R.mipmap.home_hui);
                 jokeImage.setBackgroundResource(R.mipmap.joke_hui);
                 menuImage.setBackgroundResource(R.mipmap.menu_hui);
-                meImage.setBackgroundResource(R.mipmap.touxiang_huang);
                 break;
         }
     }
@@ -153,9 +139,6 @@ public class MainActivity extends BaseActivity implements Main {
                 break;
             case R.id.menu_layout:
                 index = 2;
-                break;
-            case R.id.me_layout:
-                index = 3;
                 break;
         }
         mainPresenter.switchFragment(index);
