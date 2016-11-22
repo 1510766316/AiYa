@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +19,6 @@ import app.wgx.com.aiYa.activities.main.view.Main;
 import app.wgx.com.aiYa.fragments.main.HomeFragment;
 import app.wgx.com.aiYa.fragments.main.JokeFragment;
 import app.wgx.com.aiYa.fragments.main.MenuFragment;
-import app.wgx.com.aiYa.fragments.main.MineFragment;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -35,24 +35,15 @@ public class MainActivity extends BaseActivity implements Main {
     ImageView homeImage;
     @BindView(R.id.home_text)
     TextView homeText;
-    @BindView(R.id.home_layout)
-    RelativeLayout homeLayout;
     @BindView(R.id.joke_image)
     ImageView jokeImage;
     @BindView(R.id.joke_text)
     TextView jokeText;
-    @BindView(R.id.joke_layout)
-    RelativeLayout jokeLayout;
     @BindView(R.id.menu_image)
     ImageView menuImage;
     @BindView(R.id.menu_text)
     TextView menuText;
-    @BindView(R.id.menu_layout)
-    RelativeLayout menuLayout;
-    @BindView(R.id.me_layout)
-    RelativeLayout meLayout;
-    @BindView(R.id.fragment_container)
-    RelativeLayout fragmentContainer;
+
     private Fragment[] fragments;
     private int index;
     private int currentTabIndex;
@@ -128,7 +119,7 @@ public class MainActivity extends BaseActivity implements Main {
     }
 
 
-    @OnClick({R.id.home_layout, R.id.joke_layout, R.id.menu_layout, R.id.me_layout})
+    @OnClick({R.id.home_layout, R.id.joke_layout, R.id.menu_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_layout:
