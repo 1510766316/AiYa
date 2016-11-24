@@ -2,17 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.0"
     defaultConfig {
-        applicationId "app.wgxlove.com.doubao"
-        minSdkVersion 21
-        targetSdkVersion 23
+        applicationId "app.wgxlove.com.AiYa"
+        minSdkVersion 17
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-      /*  ndk {
-            moduleName "nativeTest"
-            abiFilters "armeabi", "armeabi-v7a", "x86"
-        }*/
     }
     buildTypes {
         release {
@@ -20,27 +16,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    /*sourceSets {
-        main {
-            jni.srcDirs = []
-            jniLibs.srcDirs = ['src/main/libs']
-        }
-    }*/
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.orhanobut:logger:1.15'
     compile 'com.github.paolorotolo:appintro:4.0.0'
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.android.support:design:24.0.0'
     compile 'com.github.k0shk0sh:PermissionHelper:1.1.0'
     compile project(':httpdownload')
     compile project(':okhttputils')
     compile 'com.github.wenmingvs:LogReport:1.0.3'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
 }

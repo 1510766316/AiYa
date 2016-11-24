@@ -31,7 +31,7 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
         mainFragmentPresenter = new MainFragmentPresenter(this);
         Map<String, String> map = new HashMap<>();
         map.put("userId", "123456");
-        mainFragmentPresenter.loadBanner(HttpConstant.HOME_BANNER_URL, map);
+        mainFragmentPresenter.loadBanner(HttpConstant.test, map);
     }
 
     @Override

@@ -59,9 +59,9 @@ public class CheckAppService extends Service {
                 new Intent(this, MainActivity.class), 0);
         builder.setContentIntent(contentIntent);
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setTicker("Foreground Service Start");
-        builder.setContentTitle("Foreground Service");
-        builder.setContentText("Make this service run in the foreground.");
+        builder.setTicker("前台服务开始");
+        builder.setContentTitle("前台服务");
+        builder.setContentText("使这个服务运行在前台.");
         Notification notification = builder.build();
         startForeground(NOTIFICATION_ID, notification);
     }

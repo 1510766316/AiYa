@@ -17,8 +17,8 @@
         android:orientation="horizontal">
 
         <app.wgx.com.aiYa.widget.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/home_person_headImg"
+            android:layout_height="@dimen/home_person_headImg"
             android:src="@android:drawable/sym_def_app_icon" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:text="huhu"
             android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/color_ffffff"
+            android:textColor="@color/color_FFFFFF"
             android:layout_gravity="center_vertical"
             />
 

@@ -33,9 +33,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="app.wgx.com.aiYa.activities.main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
 
-        <receiver android:name="app.wgx.com.aiYa.reveivers.MyReveiver" />
+        <receiver android:name="app.wgx.com.aiYa.receivers.MyReceiver" />
         <service android:name="app.wgx.com.aiYa.service.CheckAppService" />
     </application>
 

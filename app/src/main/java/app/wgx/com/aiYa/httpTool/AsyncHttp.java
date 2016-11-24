@@ -24,7 +24,7 @@ public class AsyncHttp implements Runnable {
     private static final int MSG_BEFORE = 4;
     private static final int MSG_AFTER = 5;
 
-    private static AsyncHttp instance;
+    private static AsyncHttp instance = new AsyncHttp();
 
     private String url;
     private Map<String, String> map;
@@ -58,8 +58,6 @@ public class AsyncHttp implements Runnable {
     };
 
     public static synchronized AsyncHttp getInstance() {
-        if (null == instance)
-            instance = new AsyncHttp();
         return instance;
     }
 
