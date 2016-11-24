@@ -31,6 +31,6 @@ dependencies {
     compile project(':httpdownload')
     compile project(':okhttputils')
     compile 'com.github.wenmingvs:LogReport:1.0.3'
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:design:+'
 }
