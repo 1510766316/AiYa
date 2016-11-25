@@ -7,9 +7,10 @@ import okhttp3.Call;
  */
 
 public interface MainFragmentView {
-    void start();
-    void progress(long totalSize,float progress);
-    void error(Call call,String msg);
-    void success(String result);
-    void finish();
+    void loadBegin();
+    void loadBannerSuccess(Object response);
+    void loadBannerFailure(String msg);
+    void loadNewsSuccess(Object response);
+    void loadNewsFailure(String msg);
+    void loadFinish();
 }

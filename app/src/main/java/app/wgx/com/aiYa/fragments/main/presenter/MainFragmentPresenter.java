@@ -33,33 +33,22 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadBanner(String url, Map<String, String> map) {
-        AsyncHttp.getInstance().setHttpParams(url, map, new HttpResponseCallBack() {
-            @Override
-            public void start() {
+        OkHttpUtils.get()
+                .url(url)
+                .params(map)
+                .build()
+                .execute(new HttpCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        call.cancel();
+                        mainFragmentView.loadBannerFailure(e.getMessage().toString());
+                    }
 
-            }
-
-            @Override
-            public void progress(long totalSize, float progress) {
-
-            }
-
-            @Override
-            public void error(String msg) {
-
-            }
-
-            @Override
-            public void success(String result) {
-                HomeBannerInfo info= JsonTool.jsonToBean(result,HomeBannerInfo.class);
-                MyLogger.i(info.getMsg());
-            }
-
-            @Override
-            public void finish() {
-
-            }
-        });
+                    @Override
+                    public void onResponse(String response, int id) {
+                        mainFragmentView.loadBannerSuccess(response.toString());
+                    }
+                });
     }
 
     /**
@@ -76,30 +65,23 @@ public class MainFragmentPresenter {
                 .execute(new HttpCallBack() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        mainFragmentView.error(call, e.getMessage().toString());
+                        call.cancel();
+                        mainFragmentView.loadNewsFailure(e.getMessage().toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        mainFragmentView.success(response.toString());
+                        mainFragmentView.loadNewsSuccess(response.toString());
                     }
-
-                    @Override
-                    public void inProgress(float progress, long total, int id) {
-                        super.inProgress(progress, total, id);
-                        mainFragmentView.progress(total, progress);
-                    }
-
                     @Override
                     public void onBefore(Request request, int id) {
                         super.onBefore(request, id);
-                        mainFragmentView.start();
+                        mainFragmentView.loadBegin();
                     }
-
                     @Override
                     public void onAfter(int id) {
+                        mainFragmentView.loadFinish();
                         super.onAfter(id);
-                        mainFragmentView.finish();
                     }
                 });
     }

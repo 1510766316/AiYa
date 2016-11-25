@@ -55,14 +55,18 @@ public class CheckAppService extends Service {
 
     public void showNote(){
         Notification.Builder builder = new Notification.Builder(this);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+                intent, 0);
         builder.setContentIntent(contentIntent);
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setTicker("前台服务开始");
+       // builder.setTicker("前台服务开始");
         builder.setContentTitle("前台服务");
         builder.setContentText("使这个服务运行在前台.");
         Notification notification = builder.build();
+
         startForeground(NOTIFICATION_ID, notification);
     }
 

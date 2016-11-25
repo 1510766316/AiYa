@@ -1,122 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <app.wgx.com.aiYa.widget.bannerView.BannerView
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/banner_view_height"
+        app:layout_scrollFlags="scroll|enterAlways" />
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/home_list_height" />
 
-            <app.wgx.com.aiYa.widget.bannerView.BannerView
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/banner_view_height" />
-
-            <LinearLayout
-                android:id="@+id/switchLL"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/home_kind_height"
-                android:layout_below="@id/banner">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:id="@+id/iv1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/ic_launcher" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/iv1"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/home"
-                            android:textColor="@color/color_5a5a5a"
-                            android:textSize="@dimen/text_size_normal" />
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:id="@+id/iv2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/ic_launcher" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/iv2"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/home"
-                            android:textColor="@color/color_5a5a5a"
-                            android:textSize="@dimen/text_size_normal" />
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:id="@+id/iv3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/ic_launcher" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/iv3"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/home"
-                            android:textColor="@color/color_5a5a5a"
-                            android:textSize="@dimen/text_size_normal" />
-                    </RelativeLayout>
-                </RelativeLayout>
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/switchLL" />
-
-
-        </RelativeLayout>
-    </ScrollView>
-
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/recyclerViewList" />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

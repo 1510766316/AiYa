@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import app.wgx.com.aiYa.assistTool.JsonTool;
 import app.wgx.com.aiYa.assistTool.MyLogger;
+import okhttp3.Call;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**

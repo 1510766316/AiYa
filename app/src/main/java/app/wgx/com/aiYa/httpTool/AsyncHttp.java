@@ -57,7 +57,7 @@ public class AsyncHttp implements Runnable {
         }
     };
 
-    public static synchronized AsyncHttp getInstance() {
+    public static  AsyncHttp getInstance() {
         return instance;
     }
 
@@ -69,7 +69,7 @@ public class AsyncHttp implements Runnable {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         httpGet();
     }
 

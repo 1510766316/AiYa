@@ -36,7 +36,6 @@
         <activity
             android:name="app.wgx.com.aiYa.activities.main.MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="app.wgx.com.aiYa.service.CheckAppService" />

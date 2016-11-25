@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by imotor on 16-10-18.
  */
@@ -17,10 +19,15 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=initLayout(inflater,container,savedInstanceState);
-        initView(view);
-        setListener();
+        view=initLayout(inflater,container);
+        ButterKnife.bind(this,view);
         return view;
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+        setListener();
     }
 
     @Override
@@ -28,7 +35,7 @@ public abstract class BaseFragment extends Fragment {
         super.onPause();
     }
 
-    protected abstract View initLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
-    protected abstract void initView(View view);
+    protected abstract View initLayout(LayoutInflater inflater,ViewGroup container);
     protected abstract void setListener();
+    protected abstract void initData();
 }
