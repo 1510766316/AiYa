@@ -1,5 +1,6 @@
 package app.wgx.com.aiYa.bean;
 
+
 import java.util.List;
 
 /**
@@ -7,36 +8,16 @@ import java.util.List;
  */
 public class HomeBannerInfo {
 
-    /**
-     * reason : success
-     * msg : 获取数据成功
-     * result : [{"id":"1","serverUrl":"http://192.168.1.102/","title":"全面从严治党进入新时代","imageUrl":"apptwo/picture/home_banner/l1.jpg","webUrl":"http://news.163.com/16/1030/15/C4KTEKSI000189FH.html","createtime":"2016-10-30","endtime":"2016-12-01","updatetime":"2016-10-31","is_enabled":"1"},{"id":"2","serverUrl":"http://192.168.1.102/","title":"增强\u201c四个意识\u201d","imageUrl":"apptwo/picture/home_banner/l2.jpg","webUrl":"http://news.163.com/16/1029/21/C4IUUH5K000189FH.html","createtime":"2016-10-30","endtime":"2017-01-06","updatetime":"2016-10-31","is_enabled":"1"},{"id":"3","serverUrl":"http://192.168.1.102/","title":"中国创新缘何被世界一再点赞？","imageUrl":"apptwo/picture/home_banner/l3.jpg","webUrl":"http://news.163.com/16/1029/20/C4ISOMCM000189FH.html","createtime":"2016-11-01","endtime":"2016-12-01","updatetime":"2016-12-01","is_enabled":"1"},{"id":"4","serverUrl":"http://192.168.1.102/","title":"落马\"吃货\"高官","imageUrl":"apptwo/picture/home_banner/l4.jpg","webUrl":"http://news.163.com/16/1030/12/C4KHQSIL0001875N.html","createtime":"2016-10-30","endtime":"2017-02-01","updatetime":"2016-11-04","is_enabled":"1"}]
-     * status : 1
-     */
-
-    private String reason;
+    private int code;
     private String msg;
-    private int status;
-    /**
-     * id : 1
-     * serverUrl : http://192.168.1.102/
-     * title : 全面从严治党进入新时代
-     * imageUrl : apptwo/picture/home_banner/l1.jpg
-     * webUrl : http://news.163.com/16/1030/15/C4KTEKSI000189FH.html
-     * createtime : 2016-10-30
-     * endtime : 2016-12-01
-     * updatetime : 2016-10-31
-     * is_enabled : 1
-     */
-
     private List<ResultBean> result;
 
-    public String getReason() {
-        return reason;
+    public int getCode() {
+        return code;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -45,14 +26,6 @@ public class HomeBannerInfo {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public List<ResultBean> getResult() {
@@ -64,30 +37,30 @@ public class HomeBannerInfo {
     }
 
     public static class ResultBean {
-        private String id;
-        private String serverUrl;
+        /**
+         * id : 1
+         * title : 哈哈
+         * type : 2
+         * imageUrl : http://pic29.nipic.com/20130515/1391526_115902145000_2.jpg
+         * webUrl : https://www.baidu.com
+         * endTime : 2016-12-03
+         * status : 1
+         */
+
+        private int id;
         private String title;
+        private int type;
         private String imageUrl;
         private String webUrl;
-        private String createTime;
         private String endTime;
-        private String updateTime;
-        private String is_enabled;
+        private int status;
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
-        }
-
-        public String getServerUrl() {
-            return serverUrl;
-        }
-
-        public void setServerUrl(String serverUrl) {
-            this.serverUrl = serverUrl;
         }
 
         public String getTitle() {
@@ -96,6 +69,14 @@ public class HomeBannerInfo {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
         }
 
         public String getImageUrl() {
@@ -114,14 +95,6 @@ public class HomeBannerInfo {
             this.webUrl = webUrl;
         }
 
-        public String getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
-        }
-
         public String getEndTime() {
             return endTime;
         }
@@ -130,20 +103,12 @@ public class HomeBannerInfo {
             this.endTime = endTime;
         }
 
-        public String getUpdateTime() {
-            return updateTime;
+        public int getStatus() {
+            return status;
         }
 
-        public void setUpdateTime(String updateTime) {
-            this.updateTime = updateTime;
-        }
-
-        public String getIs_enabled() {
-            return is_enabled;
-        }
-
-        public void setIs_enabled(String is_enabled) {
-            this.is_enabled = is_enabled;
+        public void setStatus(int status) {
+            this.status = status;
         }
     }
 }

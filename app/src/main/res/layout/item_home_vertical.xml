@@ -8,9 +8,9 @@
         layout="@layout/item_home_vertical_text"
         android:visibility="gone" />
     <include
-        layout="@layout/item_home_vertical_oneImg"
+        layout="@layout/item_home_vertical_one_img"
         android:visibility="gone" />
     <include
-        layout="@layout/item_home_vertical_oneMoreImg"
+        layout="@layout/item_home_vertical_one_more_img"
         android:visibility="gone" />
 </LinearLayout>

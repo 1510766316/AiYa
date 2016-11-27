@@ -21,13 +21,9 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=initLayout(inflater,container);
         ButterKnife.bind(this,view);
-        return view;
-    }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         initData();
         setListener();
+        return view;
     }
 
     @Override

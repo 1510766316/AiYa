@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import app.wgx.com.aiYa.R;
+import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 
 /**
@@ -36,12 +37,12 @@ public class BannerLayout extends FrameLayout {
         mTvBanner = (TextView) findViewById(R.id.tv_banner);
     }
 
-    public void setBannerEntity(BannerInfo info) {
+    public void setBannerEntity(HomeBannerInfo.ResultBean info) {
         Glide.with(getContext())
-                .load(info.bannerImageUrl)
+                .load(info.getImageUrl())
                 .into(mIvBanner);
         mTvBanner.setTextColor(textColor);
-        mTvBanner.setText(info.bannerTitle);
+        mTvBanner.setText(info.getTitle());
     }
 
     public void setTextColor(int color) {

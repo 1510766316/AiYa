@@ -18,7 +18,7 @@ public abstract class HttpCallBack extends Callback<String> {
     public String parseNetworkResponse(Response response, int id) throws IOException {
         String result = response.body().string();
         MyLogger.json(result);
-        String sss= (String) JsonTool.getKeyValue(result,"msg");
+        //String sss= (String) JsonTool.getKeyValue(result,"msg");
         return result;
     }
 

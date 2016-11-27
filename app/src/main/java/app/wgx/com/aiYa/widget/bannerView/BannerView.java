@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.wgx.com.aiYa.R;
+import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 /**
  * Created by imotor on 16-10-24.
@@ -19,7 +20,7 @@ import app.wgx.com.aiYa.R;
 
 public class BannerView extends FrameLayout {
 
-    private List<BannerInfo> mList;
+    private List<HomeBannerInfo.ResultBean> mList;
     private BannerPagerAdapter mBannerPagerAdapter;
     private BannerPoint mBannerPoint;
     private ViewPager mViewPager;
@@ -56,7 +57,7 @@ public class BannerView extends FrameLayout {
         mList = new ArrayList<>();
     }
 
-    public void addAllBanner(List<BannerInfo> list) {
+    public void addAllBanner(List<HomeBannerInfo.ResultBean> list) {
         if (null == list || list.size() == 0)
             throw new RuntimeException("Banner list can not empty");
         mList.add(list.get(list.size() - 1));
@@ -118,7 +119,7 @@ public class BannerView extends FrameLayout {
         handler.removeMessages(TIMER_MSG);
     }
 
-    public List<BannerInfo> getBannerList() {
+    public List<HomeBannerInfo.ResultBean> getBannerList() {
         return mBannerPagerAdapter.getList();
     }
 

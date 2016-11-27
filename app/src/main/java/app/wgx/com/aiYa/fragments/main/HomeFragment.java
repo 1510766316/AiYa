@@ -10,10 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import app.wgx.com.aiYa.R;
+import app.wgx.com.aiYa.assistTool.JsonTool;
+import app.wgx.com.aiYa.assistTool.NoticeTool;
+import app.wgx.com.aiYa.bean.HomeBannerInfo;
 import app.wgx.com.aiYa.commonTool.HttpConstant;
+import app.wgx.com.aiYa.dataBase.SQLiteUtil;
 import app.wgx.com.aiYa.fragments.BaseFragment;
 import app.wgx.com.aiYa.fragments.main.presenter.MainFragmentPresenter;
 import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
+import app.wgx.com.aiYa.widget.bannerView.BannerPagerAdapter;
 import app.wgx.com.aiYa.widget.bannerView.BannerView;
 import butterknife.BindView;
 
@@ -37,7 +42,7 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     protected void initData() {
         mainFragmentPresenter = new MainFragmentPresenter(this);
         Map<String, String> map = new HashMap<>();
-        map.put("userId", "123456");
+        map.put("key", HttpConstant.API_KEY);
         mainFragmentPresenter.loadBanner(HttpConstant.HOME_BANNER_URL, map);
     }
 
@@ -53,8 +58,18 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     }
 
     @Override
-    public void loadBannerSuccess(Object response) {
-
+    public void loadBannerSuccess(String response) {
+        HomeBannerInfo info= JsonTool.jsonToBean(response,HomeBannerInfo.class);
+        SQLiteUtil.getInstance().saveBanner(info.getResult());
+        if (null != info.getResult() && info.getResult().size()>0)
+            mBanner.addAllBanner(info.getResult());
+        mBanner.startBanner(2000);
+        mBanner.setBannerListener(new BannerPagerAdapter.BannerClickListener() {
+            @Override
+            public void click(int position) {
+                NoticeTool.showToast(getContext(),mBanner.getBannerList().get(position).getTitle(),2000);
+            }
+        });
     }
 
     @Override
@@ -63,7 +78,7 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     }
 
     @Override
-    public void loadNewsSuccess(Object response) {
+    public void loadNewsSuccess(String response) {
 
     }
 

@@ -4,15 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import app.wgx.com.aiYa.MyApplication;
-import app.wgx.com.aiYa.assistTool.FileTool;
-import app.wgx.com.aiYa.assistTool.VariableTool;
 import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 /**
@@ -22,40 +17,22 @@ public class SQLiteUtil {
 
     private static SQLiteUtil instance;
 
-    private static DBOpenHelp openHelp;
 
     private static SQLiteDatabase mReadWriteDataBase;
 
-    private static String db_path = VariableTool.DB_SAVE_DIRECTORY + "/" + DBConstant.DB_NAME;
+    private static DBOpenHelp openHelp;
 
     /**
      * @return 获取SQLiteUtil 单例
      */
     public static SQLiteUtil getInstance() {
-        if (null == instance) {
+        if (null == instance){
             instance = new SQLiteUtil();
-            File dbFile = new File(db_path);
-            File parent = dbFile.getParentFile();
-            if (!parent.exists()) {
-                parent.mkdirs();
-            }
-            if (!dbFile.exists()) {
-                try {
-                    dbFile.createNewFile();
-                    InputStream inputStream = MyApplication.mContext.getAssets().open(DBConstant.DB_NAME);
-                    FileTool.copyFile(inputStream, dbFile);
-                    mReadWriteDataBase = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                mReadWriteDataBase = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
-            }
-
+            openHelp = new DBOpenHelp();
+            mReadWriteDataBase = openHelp.getWritableDatabase();
         }
         return instance;
     }
-
 
     /**
      * @param id
@@ -63,10 +40,10 @@ public class SQLiteUtil {
      * @Title isExistMessage
      * @Description 判断banner是否存在
      */
-    public boolean isExistBanner(String id) {
+    public boolean isExistBanner(int id) {
         boolean flag = false;
         Cursor cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null,
-                "id=?", new String[]{id}, null, null,
+                "id=" + id, null, null, null,
                 null);
         if (cursor != null && cursor.getCount() > 0) {
             flag = true;
@@ -75,21 +52,20 @@ public class SQLiteUtil {
         return flag;
     }
 
-
     /**
      * @param id
      * @return void
      * @Title updateNoticeStatus
      * @Description 更新消息状态
      */
-    public void updateBannerStatus(String id, boolean status) {
+    public void updateBannerStatus(int id, boolean status) {
         ContentValues contentValues = new ContentValues();
         if (status)
-            contentValues.put("is_enabled", "1");
+            contentValues.put("status", 1);
         else
-            contentValues.put("is_enabled", "0");
+            contentValues.put("status", 0);
         mReadWriteDataBase.update(DBConstant.HOME_BANNER_TAB, contentValues,
-                "id=?", new String[]{id});
+                "id=" + id, null);
 
     }
 
@@ -99,26 +75,25 @@ public class SQLiteUtil {
      * @Description 获取所有Banner
      */
     public List<HomeBannerInfo.ResultBean> getAllBanner(boolean status) {
+        deleteOverdueBanner();
         List<HomeBannerInfo.ResultBean> list = new ArrayList<>();
         Cursor cursor;
         if (status)
-            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "is_enabled=1",
-                    null, null, null, "_id DESC");
+            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "status=1",
+                    null, null, null, "id DESC");
         else
-            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "is_enabled=0",
-                    null, null, null, "_id DESC");
+            cursor = mReadWriteDataBase.query(DBConstant.HOME_BANNER_TAB, null, "status=0",
+                    null, null, null, "id DESC");
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 HomeBannerInfo.ResultBean resultBean = new HomeBannerInfo.ResultBean();
-                resultBean.setId(cursor.getString(cursor.getColumnIndex("id")));
-                resultBean.setServerUrl(cursor.getString(cursor.getColumnIndex("serverUrl")));
+                resultBean.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 resultBean.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+                resultBean.setType(cursor.getInt(cursor.getColumnIndex("type")));
                 resultBean.setImageUrl(cursor.getString(cursor.getColumnIndex("imageUrl")));
                 resultBean.setWebUrl(cursor.getString(cursor.getColumnIndex("webUrl")));
-                resultBean.setCreateTime(cursor.getString(cursor.getColumnIndex("createTime")));
                 resultBean.setEndTime(cursor.getString(cursor.getColumnIndex("endTime")));
-                resultBean.setUpdateTime(cursor.getString(cursor.getColumnIndex("updateTime")));
-                resultBean.setIs_enabled(cursor.getString(cursor.getColumnIndex("is_enabled")));
+                resultBean.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
                 list.add(resultBean);
             }
         }
@@ -129,22 +104,21 @@ public class SQLiteUtil {
     /**
      * 保存banner
      *
-     * @param info
+     * @param l
      */
-    public void saveBanner(HomeBannerInfo.ResultBean info) {
-        if (!isExistBanner(info.getId())) {
-            ContentValues values = new ContentValues();
-            values.put("id", info.getId());
-            values.put("serverUrl", info.getServerUrl());
-            values.put("title", info.getTitle());
-            values.put("imageUrl", info.getImageUrl());
-            values.put("webUrl", info.getWebUrl());
-            values.put("createTime", info.getCreateTime());
-            values.put("endTime", info.getEndTime());
-            values.put("updateTime", info.getUpdateTime());
-            values.put("is_enabled", info.getIs_enabled());
-            mReadWriteDataBase.insert(DBConstant.HOME_BANNER_TAB, null, values);
-        }
+    public void saveBanner(List<HomeBannerInfo.ResultBean> l) {
+        for (HomeBannerInfo.ResultBean info : l)
+            if (!isExistBanner(info.getId())) {
+                ContentValues values = new ContentValues();
+                values.put("id", info.getId());
+                values.put("title", info.getTitle());
+                values.put("type", info.getType());
+                values.put("imageUrl", info.getImageUrl());
+                values.put("webUrl", info.getWebUrl());
+                values.put("endTime", info.getEndTime());
+                values.put("status", info.getEndTime());
+                mReadWriteDataBase.insert(DBConstant.HOME_BANNER_TAB, null, values);
+            }
     }
 
     /**
@@ -152,11 +126,23 @@ public class SQLiteUtil {
      *
      * @param id
      */
-    public void deleteBanner(String id) {
+    public void deleteBanner(int id) {
         mReadWriteDataBase.beginTransaction();
         if (isExistBanner(id))
-            mReadWriteDataBase.delete(DBConstant.HOME_BANNER_TAB, "id=?",
-                    new String[]{id});
+            mReadWriteDataBase.delete(DBConstant.HOME_BANNER_TAB, "id="+id ,
+                    null);
+        mReadWriteDataBase.setTransactionSuccessful();// 事务结束
+        mReadWriteDataBase.endTransaction();// 释放事务
+
+    }
+
+    /**
+     * 删除过期轮播图
+     */
+    private void deleteOverdueBanner() {
+        mReadWriteDataBase.beginTransaction();
+        mReadWriteDataBase.delete(DBConstant.HOME_BANNER_TAB, "status=0",
+                null);
         mReadWriteDataBase.setTransactionSuccessful();// 事务结束
         mReadWriteDataBase.endTransaction();// 释放事务
 

@@ -8,9 +8,9 @@ import okhttp3.Call;
 
 public interface MainFragmentView {
     void loadBegin();
-    void loadBannerSuccess(Object response);
+    void loadBannerSuccess(String response);
     void loadBannerFailure(String msg);
-    void loadNewsSuccess(Object response);
+    void loadNewsSuccess(String response);
     void loadNewsFailure(String msg);
     void loadFinish();
 }

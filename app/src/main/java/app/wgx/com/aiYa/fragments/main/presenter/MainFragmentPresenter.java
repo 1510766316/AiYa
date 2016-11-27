@@ -33,22 +33,19 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadBanner(String url, Map<String, String> map) {
-        OkHttpUtils.get()
-                .url(url)
-                .params(map)
-                .build()
-                .execute(new HttpCallBack() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        call.cancel();
-                        mainFragmentView.loadBannerFailure(e.getMessage().toString());
-                    }
+        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
+            @Override
+            public void success(String result) {
+                super.success(result);
+                mainFragmentView.loadBannerSuccess(result);
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        mainFragmentView.loadBannerSuccess(response.toString());
-                    }
-                });
+            @Override
+            public void error(String msg) {
+                super.error(msg);
+                mainFragmentView.loadBannerFailure(msg);
+            }
+        });
     }
 
     /**

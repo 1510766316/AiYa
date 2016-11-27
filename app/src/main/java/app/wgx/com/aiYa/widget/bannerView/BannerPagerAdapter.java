@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.wgx.com.aiYa.R;
+import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 /**
  * banner viewpager adapter
@@ -18,27 +19,27 @@ import app.wgx.com.aiYa.R;
 public class BannerPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    List<BannerInfo> mInfo = new ArrayList<>();
+    List<HomeBannerInfo.ResultBean> mInfo = new ArrayList<>();
     List<BannerLayout> mLayouts = new ArrayList<>();
     private BannerClickListener mBannerClickListener;
     private Handler mHandler;
 
-    public BannerPagerAdapter(Context context, List<BannerInfo> list, Handler handler) {
+    public BannerPagerAdapter(Context context, List<HomeBannerInfo.ResultBean> list, Handler handler) {
         mContext = context;
         mInfo = list;
         mHandler = handler;
         getLayout();
     }
 
-    public List<BannerInfo> getList() {
+    public List<HomeBannerInfo.ResultBean> getList() {
         return mInfo;
     }
 
     private void getLayout() {
         if (null != mInfo && mInfo.size() > 0)
-            for (BannerInfo info : mInfo) {
+            for (HomeBannerInfo.ResultBean info : mInfo) {
                 BannerLayout bannerLayout = new BannerLayout(mContext);
-                  bannerLayout.setTextColor(R.color.color_333);
+                  bannerLayout.setTextColor(R.color.color_FFFFFF);
                 bannerLayout.setBannerEntity(info);
                 mLayouts.add(bannerLayout);
             }
