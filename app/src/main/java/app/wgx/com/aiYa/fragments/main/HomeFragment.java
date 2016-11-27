@@ -33,6 +33,8 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     @BindView(R.id.recyclerViewContent)
     RecyclerView mRecyclerViewContent;
 
+    private int page=1;
+    private int pageSize=10;
     @Override
     protected View initLayout(LayoutInflater inflater,ViewGroup container) {
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -70,10 +72,28 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
                 NoticeTool.showToast(getContext(),mBanner.getBannerList().get(position).getTitle(),2000);
             }
         });
+        Map<String, String> map = new HashMap<>();
+        map.put("key", HttpConstant.API_KEY);
+        mainFragmentPresenter.loadNewsType(HttpConstant.HOME_NEWSTYPE_URL, map);
+
     }
 
     @Override
     public void loadBannerFailure(String msg) {
+        NoticeTool.showToast(getContext(),msg,2000);
+    }
+
+    @Override
+    public void loadNewsTypeSuccess(String response) {
+        Map<String, String> map = new HashMap<>();
+        map.put("key", HttpConstant.API_KEY);
+        map.put("page", page+"");
+        map.put("pageSize", pageSize+"");
+        mainFragmentPresenter.loadNews(HttpConstant.HOME_NEWS_URL, map);
+    }
+
+    @Override
+    public void loadNewsTypeFailure(String msg) {
 
     }
 
@@ -84,7 +104,7 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
 
     @Override
     public void loadNewsFailure(String msg) {
-
+        NoticeTool.showToast(getContext(),msg,2000);
     }
 
     @Override

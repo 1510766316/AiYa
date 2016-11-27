@@ -49,38 +49,47 @@ public class MainFragmentPresenter {
     }
 
     /**
-     * 加载List数据
+     * 加载newsType
      *
      * @param url
      * @param map
      */
-    public void loadData(String url, Map<String, String> map) {
-        OkHttpUtils.get()
-                .url(url)
-                .params(map)
-                .build()
-                .execute(new HttpCallBack() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        call.cancel();
-                        mainFragmentView.loadNewsFailure(e.getMessage().toString());
-                    }
+    public void loadNewsType(String url, Map<String, String> map) {
+        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
+            @Override
+            public void success(String result) {
+                super.success(result);
+                mainFragmentView.loadNewsTypeSuccess(result);
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        mainFragmentView.loadNewsSuccess(response.toString());
-                    }
-                    @Override
-                    public void onBefore(Request request, int id) {
-                        super.onBefore(request, id);
-                        mainFragmentView.loadBegin();
-                    }
-                    @Override
-                    public void onAfter(int id) {
-                        mainFragmentView.loadFinish();
-                        super.onAfter(id);
-                    }
-                });
+            @Override
+            public void error(String msg) {
+                super.error(msg);
+                mainFragmentView.loadNewsTypeFailure(msg);
+            }
+        });
+    }
+
+    /**
+     * 加载newsType
+     *
+     * @param url
+     * @param map
+     */
+    public void loadNews(String url, Map<String, String> map) {
+        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
+            @Override
+            public void success(String result) {
+                super.success(result);
+                mainFragmentView.loadNewsSuccess(result);
+            }
+
+            @Override
+            public void error(String msg) {
+                super.error(msg);
+                mainFragmentView.loadNewsFailure(msg);
+            }
+        });
     }
 
 }
