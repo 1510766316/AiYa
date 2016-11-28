@@ -26,11 +26,6 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
     protected abstract View initLayout(LayoutInflater inflater,ViewGroup container);
     protected abstract void setListener();
     protected abstract void initData();
