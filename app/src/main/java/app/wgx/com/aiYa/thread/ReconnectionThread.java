@@ -15,9 +15,7 @@
  */
 package app.wgx.com.aiYa.thread;
 
-import android.util.Log;
-
-/** 
+/**
  * A thread class for reConnecting the server.
  */
 public class ReconnectionThread extends Thread {
@@ -34,7 +32,7 @@ public class ReconnectionThread extends Thread {
             while (!isInterrupted()) {
 
                 Thread.sleep((long) waiting() * 1000L);
-              //  xmppManager.connect();
+                //  xmppManager.connect();
                 waiting++;
             }
         } catch (final InterruptedException e) {
