@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <meta-data
+        android:name="app.wgx.com.aiYa.assistTool.MyGlideModule"
+        android:value="GlideModule" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +42,13 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="app.wgx.com.aiYa.service.CheckAppService" />
+        <receiver android:name=".receiver.NetworkReceiver">
+            <intent-filter>
+                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

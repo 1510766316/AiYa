@@ -19,7 +19,7 @@
         <app.wgx.com.aiYa.widget.CircleImageView
             android:layout_width="@dimen/home_person_headImg"
             android:layout_height="@dimen/home_person_headImg"
-            android:src="@drawable/gear" />
+            android:src="@mipmap/gear" />
 
         <TextView
             android:layout_width="wrap_content"

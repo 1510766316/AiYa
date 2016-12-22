@@ -3,11 +3,11 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_e13b3b</item>
-        <item name="colorPrimaryDark">@color/color_e13b3b</item>
-        <item name="colorAccent">@color/color_e13b3b</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <!-- 底部导航栏颜色 -->
-        <item name="android:navigationBarColor">@color/color_e13b3b</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

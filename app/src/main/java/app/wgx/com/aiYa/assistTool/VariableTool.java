@@ -9,6 +9,7 @@ public class VariableTool {
     public static final String ROOT_DIRECTORY = StorageTool.getStorageDirectory()+"/aiYa"; // 程序储存器上的根目录
     public static final String DB_SAVE_DIRECTORY = ROOT_DIRECTORY + "/db";//数据库缓存目录
     public static final String IMAGE_SAVE_DIRECTORY = ROOT_DIRECTORY + "/image"; // 图片缓存目录
+    public static final int IMAGE_SAVE_CACHESIZE = 1024*1024*150; // 图片缓存大小
     public static final String FILE_SAVE_DIRECTORY = ROOT_DIRECTORY + "/data";//文件存储目录
     public static final String LOG_SAVE_DIRECTORY = ROOT_DIRECTORY + "/log";//日志缓存目录
     public static final String APK_SAVE_DIRECTORY = ROOT_DIRECTORY + "/updateAPK";//apk更新缓存目录

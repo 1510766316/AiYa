@@ -18,6 +18,10 @@
             android:id="@+id/nav_manage"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="Tools" />
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@android:drawable/ic_menu_upload"
+            android:title="Download" />
     </group>
 
     <item android:title="Communicate">
@@ -30,6 +34,10 @@
                 android:id="@+id/nav_send"
                 android:icon="@android:drawable/ic_menu_send"
                 android:title="Send" />
+            <item
+                android:id="@+id/nav_collection"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Collection" />
         </menu>
     </item>
 

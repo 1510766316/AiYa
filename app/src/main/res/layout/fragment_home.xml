@@ -4,26 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <app.wgx.com.aiYa.widget.bannerView.BannerView
-        android:id="@+id/banner"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/banner_view_height"
-        app:layout_scrollFlags="scroll|enterAlways" />
+        android:layout_height="wrap_content">
 
-    <RelativeLayout
+        <com.stx.xhb.xbanner.XBanner xmlns:appNs="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            appNs:AutoPlayTime="3000"
+            appNs:isShowIndicatorOnlyOne="true"
+            appNs:isShowNumberIndicator="true"
+            appNs:pageChangeDuration="800"
+            appNs:pointNormal="@drawable/banner_shape_normal"
+            appNs:pointSelect="@drawable/banner_shape_selected"
+            appNs:pointsContainerBackground="#44aaaaaa"
+            appNs:pointsPosition="CENTER"
+            appNs:tipTextSize="12sp" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewList"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/home_list_height" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/recyclerViewList" />
-    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

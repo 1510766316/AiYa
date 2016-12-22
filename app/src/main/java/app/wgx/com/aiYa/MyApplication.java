@@ -13,6 +13,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import java.util.concurrent.TimeUnit;
 
 import app.wgx.com.aiYa.assistTool.VariableTool;
+import app.wgx.com.aiYa.bean.NetworkStateInfo;
 import okhttp3.OkHttpClient;
 
 /**
@@ -24,12 +25,13 @@ import okhttp3.OkHttpClient;
  */
 public class MyApplication extends Application {
     public static Context mContext, mCurrentContext;
-
+    public static NetworkStateInfo mNetworkStateInfo;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
+        mNetworkStateInfo =new NetworkStateInfo();
         initOkHttp();
     //    initCrashReport();
     }

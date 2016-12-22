@@ -34,4 +34,6 @@ dependencies {
     compile 'com.github.wenmingvs:LogReport:1.0.3'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:design:+'
+    compile 'com.xhb:xbanner:1.2.6'//替换成最新的版本号
+    compile 'com.nineoldandroids:library:2.4.0'
 }
