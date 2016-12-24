@@ -1,19 +1,13 @@
 package app.wgx.com.aiYa.fragments.main.presenter;
 
-
-import com.zhy.http.okhttp.OkHttpUtils;
+import com.lzy.okgo.OkGo;
 
 import java.util.Map;
 
-import app.wgx.com.aiYa.assistTool.JsonTool;
-import app.wgx.com.aiYa.assistTool.MyLogger;
-import app.wgx.com.aiYa.bean.HomeBannerInfo;
 import app.wgx.com.aiYa.callback.HttpCallBack;
-import app.wgx.com.aiYa.callback.HttpResponseCallBack;
 import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
-import app.wgx.com.aiYa.httpTool.AsyncHttp;
 import okhttp3.Call;
-import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 主页 4 个fragment presenter
@@ -33,19 +27,26 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadBanner(String url, Map<String, String> map) {
-        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
-            @Override
-            public void success(String result) {
-                super.success(result);
-                mainFragmentView.loadBannerSuccess(result);
-            }
+        OkGo.get(url)
+                .params(map)
+                .execute(new HttpCallBack() {
+                    /**
+                     * 对返回数据进行操作的回调， UI线程
+                     */
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        mainFragmentView.loadBannerSuccess(s);
+                    }
 
-            @Override
-            public void error(String msg) {
-                super.error(msg);
-                mainFragmentView.loadBannerFailure(msg);
-            }
-        });
+                    /**
+                     * 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程
+                     */
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mainFragmentView.loadBannerFailure(e.getMessage().toString());
+                    }
+                });
     }
 
     /**
@@ -55,19 +56,26 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadNewsType(String url, Map<String, String> map) {
-        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
-            @Override
-            public void success(String result) {
-                super.success(result);
-                mainFragmentView.loadNewsTypeSuccess(result);
-            }
+        OkGo.get(url)
+                .params(map)
+                .execute(new HttpCallBack() {
+                    /**
+                     * 对返回数据进行操作的回调， UI线程
+                     */
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        mainFragmentView.loadNewsTypeSuccess(s);
+                    }
 
-            @Override
-            public void error(String msg) {
-                super.error(msg);
-                mainFragmentView.loadNewsTypeFailure(msg);
-            }
-        });
+                    /**
+                     * 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程
+                     */
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mainFragmentView.loadNewsTypeFailure(e.getMessage().toString());
+                    }
+                });
     }
 
     /**
@@ -77,19 +85,26 @@ public class MainFragmentPresenter {
      * @param map
      */
     public void loadNews(String url, Map<String, String> map) {
-        AsyncHttp.getInstance().setHttpParams(url,map,new HttpResponseCallBack(){
-            @Override
-            public void success(String result) {
-                super.success(result);
-                mainFragmentView.loadNewsSuccess(result);
-            }
+        OkGo.get(url)
+                .params(map)
+                .execute(new HttpCallBack() {
+                    /**
+                     * 对返回数据进行操作的回调， UI线程
+                     */
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        mainFragmentView.loadNewsSuccess(s);
+                    }
 
-            @Override
-            public void error(String msg) {
-                super.error(msg);
-                mainFragmentView.loadNewsFailure(msg);
-            }
-        });
+                    /**
+                     * 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程
+                     */
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mainFragmentView.loadNewsFailure(e.getMessage().toString());
+                    }
+                });
     }
 
 }

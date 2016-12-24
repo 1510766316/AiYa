@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.wgx.com.aiYa.MyApplication;
+import app.wgx.com.aiYa.assistTool.MyLogger;
 import app.wgx.com.aiYa.bean.HomeBannerInfo;
 
 /**

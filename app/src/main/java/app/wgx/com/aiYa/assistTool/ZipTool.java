@@ -52,13 +52,13 @@ public class ZipTool {
      */
     public static void zipFiles(Collection<File> resFileList, File zipFile, String comment)
             throws IOException {
-        ZipOutputStream zipout = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(
+        ZipOutputStream zipOut = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(
                 zipFile), BUFF_SIZE));
         for (File resFile : resFileList) {
-            zipFile(resFile, zipout, "");
+            zipFile(resFile, zipOut, "");
         }
-        zipout.setComment(comment);
-        zipout.close();
+        zipOut.setComment(comment);
+        zipOut.close();
     }
 
     /**

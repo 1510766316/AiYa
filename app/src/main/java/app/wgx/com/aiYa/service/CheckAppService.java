@@ -24,8 +24,6 @@ import app.wgx.com.aiYa.activities.main.MainActivity;
  */
 public class CheckAppService extends Service {
 
-    private CheckBinder checkBinder;
-
     private static final int NOTIFICATION_ID = 1; // 如果id设置为0,会导致不能设置为前台service
     /**
      * Called by the system when the service is first created.  Do not call this method directly.
@@ -33,7 +31,6 @@ public class CheckAppService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        checkBinder=new CheckBinder();
     }
 
     @Override
@@ -44,14 +41,9 @@ public class CheckAppService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return checkBinder;
+        return null;
     }
 
-    public  class CheckBinder extends Binder {
-        public CheckAppService getService() {
-            return CheckAppService.this;
-        }
-    }
 
     public void showNote(){
         Notification.Builder builder = new Notification.Builder(this);
@@ -96,20 +88,5 @@ public class CheckAppService extends Service {
      */
     public interface checkApp {
         void connectFailure();//连接服务器失败
-    }
-
-    /**
-     * @Describe 更新App
-     * <p>
-     * Create at 2016/9/10 15:34
-     */
-    public interface downApp {
-        void beginDown();
-
-        void downing(long progress);
-
-        void finish();
-
-        void failure();
     }
 }

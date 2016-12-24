@@ -1,1 +1,1 @@
-include ':app', ':httpdownload', ':okhttputils'
+include ':app'

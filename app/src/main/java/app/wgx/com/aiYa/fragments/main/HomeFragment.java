@@ -1,18 +1,21 @@
 package app.wgx.com.aiYa.fragments.main;
 
-import android.os.Bundle;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.stx.xhb.xbanner.XBanner;
 import com.stx.xhb.xbanner.transformers.Transformer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import app.wgx.com.aiYa.R;
@@ -26,7 +29,7 @@ import app.wgx.com.aiYa.fragments.main.presenter.MainFragmentPresenter;
 import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
 import butterknife.BindView;
 
-public class HomeFragment extends BaseFragment implements MainFragmentView {
+public class HomeFragment extends BaseFragment implements MainFragmentView, XBanner.XBannerAdapter {
 
     MainFragmentPresenter mainFragmentPresenter;
     @BindView(R.id.recyclerViewContent)
@@ -38,6 +41,7 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     @BindView(R.id.appbar)
     AppBarLayout mAppbar;
 
+    private HomeBannerInfo mHomeBannerInfo;
     private int page = 1;
     private int pageSize = 10;
 
@@ -56,21 +60,29 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
 
     @Override
     protected void setListener() {
+        mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(XBanner banner, int position) {
 
-    }
-
-
-    @Override
-    public void loadBegin() {
-
+            }
+        });
     }
 
     @Override
     public void loadBannerSuccess(String response) {
-        HomeBannerInfo info = JsonTool.jsonToBean(response, HomeBannerInfo.class);
-        SQLiteUtil.getInstance().saveBanner(info.getResult());
-        //   if (null != info.getResult() && info.getResult().size()>0)
+        mHomeBannerInfo = JsonTool.jsonToBean(response, HomeBannerInfo.class);
         mBanner.setPageTransformer(Transformer.Accordion);
+        if (null != mHomeBannerInfo.getResult() && mHomeBannerInfo.getResult().size() > 0) {
+            SQLiteUtil.getInstance().saveBanner(mHomeBannerInfo.getResult());
+            List<String> imgList = new ArrayList<>();
+            List<String> tipsList = new ArrayList<>();
+            for (HomeBannerInfo.ResultBean img : mHomeBannerInfo.getResult())
+                imgList.add(img.getImageUrl());
+            for (HomeBannerInfo.ResultBean tips : mHomeBannerInfo.getResult())
+                tipsList.add(tips.getTitle());
+            mBanner.setData(imgList, tipsList);
+        }
+        mBanner.setmAdapter(this);
         Map<String, String> map = new HashMap<>();
         map.put("key", HttpConstant.API_KEY);
         mainFragmentPresenter.loadNewsType(HttpConstant.HOME_NEWSTYPE_URL, map);
@@ -105,10 +117,20 @@ public class HomeFragment extends BaseFragment implements MainFragmentView {
     public void loadNewsFailure(String msg) {
         NoticeTool.showToast(getContext(), msg, 2000);
     }
-
     @Override
-    public void loadFinish() {
-
+    public void onResume() {
+        super.onResume();
+        mBanner.startAutoPlay();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mBanner.stopAutoPlay();
     }
 
+    @Override
+    public void loadBanner(XBanner banner, View view, int position) {
+        Glide.with(getActivity()).load(mHomeBannerInfo.getResult().get(position).getImageUrl()).placeholder(new ColorDrawable(getContext().getResources().getColor(R.color.color_FFFFFF)) {
+        }).error(new ColorDrawable(getContext().getResources().getColor(R.color.color_FFFFFF))).into((ImageView) view);
+    }
 }

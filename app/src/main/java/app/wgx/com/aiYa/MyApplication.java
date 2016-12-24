@@ -3,18 +3,15 @@ package app.wgx.com.aiYa;
 import android.app.Application;
 import android.content.Context;
 
-import com.aspsine.multithreaddownload.DownloadConfiguration;
-import com.aspsine.multithreaddownload.DownloadManager;
+import com.lzy.okgo.OkGo;
 import com.wenming.library.LogReport;
 import com.wenming.library.save.imp.CrashWriter;
 import com.wenming.library.upload.http.HttpReporter;
-import com.zhy.http.okhttp.OkHttpUtils;
 
-import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import app.wgx.com.aiYa.assistTool.VariableTool;
 import app.wgx.com.aiYa.bean.NetworkStateInfo;
-import okhttp3.OkHttpClient;
 
 /**
  * Create view by wgx
@@ -32,98 +29,27 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
         mNetworkStateInfo =new NetworkStateInfo();
-        initOkHttp();
-    //    initCrashReport();
+        initHttp();
     }
 
 
     /**
-     * 初始化下载框架
+     * 初始化网络框架
      */
-    private void initDownloader() {
-        DownloadConfiguration configuration = new DownloadConfiguration();
-        configuration.setMaxThreadNum(10);
-        configuration.setThreadNum(3);
-        DownloadManager.getInstance().init(getApplicationContext(), configuration);
-    }
-    /**************************
-    // first: build a DownloadRequest:
-    final DownloadRequest request = new DownloadRequest.Builder()
-            .setName(appInfo.getName() + ".apk")
-            .setUri(appInfo.getUrl())
-            .setFolder(mDownloadDir)
-            .build();
+    private void initHttp() {
+        OkGo.init(this);
+        try {
+            //以下都不是必须的，根据需要自行选择,一般来说只需要 debug,缓存相关,cookie相关的 就可以了
+            OkGo.getInstance()
+                    // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
+                    // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
+                    .debug("OkGo", Level.INFO, true)
+                    //可以全局统一设置超时重连次数,默认为三次,那么最差的情况会请求4次(一次原始请求,三次重连请求),不需要可以设置为0
+                    .setRetryCount(3);
 
-// download:
-// the tag here, you can simply use download uri as your tag;
-    DownloadManager.getInstance().download(request, tag, new CallBack() {
-        @Override
-        public void onStarted() {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        @Override
-        public void onConnecting() {
-
-        }
-
-        @Override
-        public void onConnected(long total, boolean isRangeSupport) {
-
-        }
-
-        @Override
-        public void onProgress(long finished, long total, int progress) {
-
-        }
-
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onDownloadPaused() {
-
-        }
-
-        @Override
-        public void onDownloadCanceled() {
-
-        }
-
-        @Override
-        public void onFailed(DownloadException e) {
-
-        }
-    });
-
-//pause
-    DownloadManager.getInstance().pause(tag);
-
-//pause all
-    DownloadManager.getInstance().pauseAll();
-
-//cancel
-    DownloadManager.getInstance().cancel(tag);
-
-//cancel all
-    DownloadManager.getInstance().cancelAll();
-
-//delete
-    DownloadManager.getInstance().delete(tag);
-   **************/
-
-    /**
-     * 初始化okHttpUtils
-     */
-    private void initOkHttp(){
-        OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .connectTimeout(1000*8L, TimeUnit.MILLISECONDS)
-                .readTimeout(1000*8L,TimeUnit.MILLISECONDS)
-                .build();
-        OkHttpUtils.initClient(okHttpClient);
-
     }
 
     private void initCrashReport() {

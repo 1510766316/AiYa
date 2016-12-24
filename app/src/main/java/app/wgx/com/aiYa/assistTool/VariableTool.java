@@ -14,11 +14,7 @@ public class VariableTool {
     public static final String LOG_SAVE_DIRECTORY = ROOT_DIRECTORY + "/log";//日志缓存目录
     public static final String APK_SAVE_DIRECTORY = ROOT_DIRECTORY + "/updateAPK";//apk更新缓存目录
     public static final String apkSave = APK_SAVE_DIRECTORY +"/"+ "douBao.apk"; // ａｐｋ完整路径名
-    /****************************************
-     * sqlite数据库
-     ********************************************************************/
 
-    public static final String TAB_HMOE_BANNER = "tab_home_banner";//HomeFragment bannerView 表
     /************************
      * SharedPreferences 数据保存
      *************************/
