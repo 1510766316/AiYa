@@ -1,6 +1,8 @@
 package app.wgx.com.aiYa.fragments.main;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +25,13 @@ import app.wgx.com.aiYa.assistTool.JsonTool;
 import app.wgx.com.aiYa.assistTool.NoticeTool;
 import app.wgx.com.aiYa.bean.HomeBannerInfo;
 import app.wgx.com.aiYa.commonTool.HttpConstant;
-import app.wgx.com.aiYa.dataBase.SQLiteUtil;
 import app.wgx.com.aiYa.fragments.BaseFragment;
 import app.wgx.com.aiYa.fragments.main.presenter.MainFragmentPresenter;
-import app.wgx.com.aiYa.fragments.main.view.MainFragmentView;
+import app.wgx.com.aiYa.fragments.main.model.MainFragmentModel;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class HomeFragment extends BaseFragment implements MainFragmentView, XBanner.XBannerAdapter {
+public class HomeFragment extends BaseFragment implements MainFragmentModel, XBanner.XBannerAdapter {
 
     MainFragmentPresenter mainFragmentPresenter;
     @BindView(R.id.recyclerViewContent)
@@ -45,21 +47,25 @@ public class HomeFragment extends BaseFragment implements MainFragmentView, XBan
     private int page = 1;
     private int pageSize = 10;
 
+    private View mView;
+    @Nullable
     @Override
-    protected View initLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this,mView);
+        initData();
+        setListener();
+        return mView;
     }
 
-    @Override
-    protected void initData() {
-        mainFragmentPresenter = new MainFragmentPresenter(this);
+    private void initData() {
+        mainFragmentPresenter = new MainFragmentPresenter(mContext,this);
         Map<String, String> map = new HashMap<>();
         map.put("key", HttpConstant.API_KEY);
         mainFragmentPresenter.loadBanner(HttpConstant.HOME_BANNER_URL, map);
     }
 
-    @Override
-    protected void setListener() {
+    private void setListener() {
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
@@ -73,7 +79,6 @@ public class HomeFragment extends BaseFragment implements MainFragmentView, XBan
         mHomeBannerInfo = JsonTool.jsonToBean(response, HomeBannerInfo.class);
         mBanner.setPageTransformer(Transformer.Accordion);
         if (null != mHomeBannerInfo.getResult() && mHomeBannerInfo.getResult().size() > 0) {
-            SQLiteUtil.getInstance().saveBanner(mHomeBannerInfo.getResult());
             List<String> imgList = new ArrayList<>();
             List<String> tipsList = new ArrayList<>();
             for (HomeBannerInfo.ResultBean img : mHomeBannerInfo.getResult())
@@ -84,7 +89,6 @@ public class HomeFragment extends BaseFragment implements MainFragmentView, XBan
         }
         mBanner.setmAdapter(this);
         Map<String, String> map = new HashMap<>();
-        map.put("key", HttpConstant.API_KEY);
         mainFragmentPresenter.loadNewsType(HttpConstant.HOME_NEWSTYPE_URL, map);
 
     }
@@ -97,7 +101,6 @@ public class HomeFragment extends BaseFragment implements MainFragmentView, XBan
     @Override
     public void loadNewsTypeSuccess(String response) {
         Map<String, String> map = new HashMap<>();
-        map.put("key", HttpConstant.API_KEY);
         map.put("page", page + "");
         map.put("pageSize", pageSize + "");
         mainFragmentPresenter.loadNews(HttpConstant.HOME_NEWS_URL, map);
@@ -133,4 +136,5 @@ public class HomeFragment extends BaseFragment implements MainFragmentView, XBan
         Glide.with(getActivity()).load(mHomeBannerInfo.getResult().get(position).getImageUrl()).placeholder(new ColorDrawable(getContext().getResources().getColor(R.color.color_FFFFFF)) {
         }).error(new ColorDrawable(getContext().getResources().getColor(R.color.color_FFFFFF))).into((ImageView) view);
     }
+
 }

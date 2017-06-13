@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import app.wgx.com.aiYa.MyApplication;
+import app.wgx.com.aiYa.bean.NetworkStateInfo;
 
 /**
  * Created by wgx on 16-12-22.
@@ -26,24 +27,24 @@ public class NetworkReceiver extends BroadcastReceiver {
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
             if (activeNetwork != null) {
-                MyApplication.mNetworkStateInfo.setCanConnect(true);
+                NetworkStateInfo.getInstance().setConnected(true);
                 if (activeNetwork.isConnected()) {
                     if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                        MyApplication.mNetworkStateInfo.setCanWifi(true);
-                        MyApplication.mNetworkStateInfo.setCanMobile(false);
+                        NetworkStateInfo.getInstance().setMobile(false);
+                        NetworkStateInfo.getInstance().setWifi(true);
                     } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                        MyApplication.mNetworkStateInfo.setCanWifi(false);
-                        MyApplication.mNetworkStateInfo.setCanMobile(true);
+                        NetworkStateInfo.getInstance().setMobile(true);
+                        NetworkStateInfo.getInstance().setWifi(false);
                     }
                 } else {
-                    MyApplication.mNetworkStateInfo.setCanConnect(false);
-                    MyApplication.mNetworkStateInfo.setCanWifi(false);
-                    MyApplication.mNetworkStateInfo.setCanMobile(false);
+                    NetworkStateInfo.getInstance().setConnected(false);
+                    NetworkStateInfo.getInstance().setMobile(false);
+                    NetworkStateInfo.getInstance().setWifi(false);
                 }
             } else {   // not connected to the internet
-                MyApplication.mNetworkStateInfo.setCanConnect(false);
-                MyApplication.mNetworkStateInfo.setCanWifi(false);
-                MyApplication.mNetworkStateInfo.setCanMobile(false);
+                NetworkStateInfo.getInstance().setConnected(false);
+                NetworkStateInfo.getInstance().setMobile(false);
+                NetworkStateInfo.getInstance().setWifi(false);
             }
         }
     }

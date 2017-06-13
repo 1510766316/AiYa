@@ -1,6 +1,5 @@
 package app.wgx.com.aiYa.assistTool;
 
-import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

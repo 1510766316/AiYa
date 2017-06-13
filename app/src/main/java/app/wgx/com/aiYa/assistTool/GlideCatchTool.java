@@ -1,5 +1,6 @@
 package app.wgx.com.aiYa.assistTool;
 
+import android.content.Context;
 import android.os.Looper;
 import com.bumptech.glide.Glide;
 
@@ -38,17 +39,17 @@ public class GlideCatchTool {
     }
 
     // 清除图片磁盘缓存，调用Glide自带方法
-    public boolean clearCacheDiskSelf() {
+    public boolean clearCacheDiskSelf(final Context context) {
         try {
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.get(MyApplication.mContext).clearDiskCache();
+                        Glide.get(context).clearDiskCache();
                     }
                 }).start();
             } else {
-                Glide.get(MyApplication.mContext).clearDiskCache();
+                Glide.get(context).clearDiskCache();
             }
             return true;
         } catch (Exception e) {
@@ -58,10 +59,10 @@ public class GlideCatchTool {
     }
 
     // 清除Glide内存缓存
-    public boolean clearCacheMemory() {
+    public boolean clearCacheMemory(Context context) {
         try {
             if (Looper.myLooper() == Looper.getMainLooper()) { //只能在主线程执行
-                Glide.get(MyApplication.mContext).clearMemory();
+                Glide.get(context).clearMemory();
                 return true;
             }
         } catch (Exception e) {

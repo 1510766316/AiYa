@@ -4,7 +4,7 @@ package app.wgx.com.aiYa.commonTool;
  * 网络请求接口
  */
 public class HttpConstant {
-    public static final String BASE_URL="http://192.168.1.101/api/";
+    public static final String BASE_URL="http://192.168.31.1/api/";
     public static final String API_KEY="68545b90359223109807aef3dc8c4f71";
     /**
      * 首页轮播图

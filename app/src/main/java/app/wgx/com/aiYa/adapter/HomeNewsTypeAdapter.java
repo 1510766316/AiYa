@@ -3,7 +3,7 @@ package app.wgx.com.aiYa.adapter;
 import java.util.List;
 
 /**
- * Created by imotor on 16-11-28.
+ * Created by wugx on 16-11-28.
  */
 
 public class HomeNewsTypeAdapter extends BaseQuickAdapter<BaseViewHolder> {

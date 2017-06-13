@@ -75,16 +75,6 @@ public class ImageTool {
 
     }
 
-//	/**
-//	 * 本地图片多选模式
-//	 *
-//	 * @param activity
-//	 */
-//	public static void multiOpenLocalImages(Activity activity) {
-//		Intent intent = new Intent(activity, ImageAlbumShowActivity.class);
-//		activity.startActivity(intent);
-//	}
-
     public static void cropImage(Activity activity, Uri srcUri, int type) {
 
         ImageTool.cropImageUri = ImageTool.createImagePathUri();

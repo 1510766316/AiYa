@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import app.wgx.com.aiYa.R;
-import app.wgx.com.aiYa.activities.main.MainActivity;
+import app.wgx.com.aiYa.activities.main.MainModelActivity;
 
 /**
  * Create view by wgx
@@ -20,17 +20,18 @@ public class LoadingActivity extends BaseActivity {
     private int[] images = {R.mipmap.p1, R.mipmap.p2, R.mipmap.p3, R.mipmap.p4};
 
     @Override
-    protected void loadLayout(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        initView();
+        setListener();
     }
 
-    @Override
-    protected void initView() {
+    private void initView() {
         skip();
     }
 
-    @Override
-    protected void setListener() {
+    private void setListener() {
 
     }
 
@@ -43,7 +44,7 @@ public class LoadingActivity extends BaseActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                startActivity(new Intent(LoadingActivity.this, MainModelActivity.class));
                 LoadingActivity.this.finish();
             }
         }).start();

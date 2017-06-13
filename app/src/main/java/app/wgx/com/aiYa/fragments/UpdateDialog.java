@@ -1,6 +1,5 @@
 package app.wgx.com.aiYa.fragments;
 
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;

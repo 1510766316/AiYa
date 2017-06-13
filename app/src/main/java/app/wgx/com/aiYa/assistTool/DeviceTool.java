@@ -28,7 +28,7 @@ public class DeviceTool {
      * <p>
      * Create at 2016/9/10 16:00
      */
-    public static String getLocalIP() {
+    public static String getLocalIP(Context context) {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
@@ -50,8 +50,8 @@ public class DeviceTool {
      * <p>
      * Create at 2016/9/10 16:01
      */
-    public static String getMacAddress() {
-        WifiManager wifi = (WifiManager) MyApplication.mContext.getSystemService(Context.WIFI_SERVICE);
+    public static String getMacAddress(Context context) {
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
         String address = "";
         if (info != null) {
@@ -65,10 +65,10 @@ public class DeviceTool {
      * <p>
      * Create at 2016/9/10 16:01
      */
-    public static String getVersion() {
+    public static String getVersion(Context context) {
         try {
-            PackageManager manager = MyApplication.mContext.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(MyApplication.mContext.getPackageName(), 0);
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
             String version = info.versionName;
             return version;
         } catch (Exception e) {
@@ -82,9 +82,9 @@ public class DeviceTool {
      * <p>
      * Create at 2016/9/10 16:01
      */
-    public static String getAppName() {
-        PackageManager pm = MyApplication.mContext.getPackageManager();
-        String appName = MyApplication.mContext.getApplicationInfo().loadLabel(pm).toString();
+    public static String getAppName(Context context) {
+        PackageManager pm = context.getPackageManager();
+        String appName = context.getApplicationInfo().loadLabel(pm).toString();
         return appName;
     }
 }

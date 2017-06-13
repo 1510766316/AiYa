@@ -6,14 +6,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import java.util.List;
 
 import app.wgx.com.aiYa.R;
-import app.wgx.com.aiYa.activities.main.MainActivity;
+import app.wgx.com.aiYa.activities.main.MainModelActivity;
 
 /**
  * Create view by wgx
@@ -47,7 +46,7 @@ public class CheckAppService extends Service {
 
     public void showNote(){
         Notification.Builder builder = new Notification.Builder(this);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainModelActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,

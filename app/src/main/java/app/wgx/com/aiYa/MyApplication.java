@@ -1,6 +1,7 @@
 package app.wgx.com.aiYa;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -10,14 +11,13 @@ import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
-import com.wenming.library.LogReport;
-import com.wenming.library.save.imp.CrashWriter;
-import com.wenming.library.upload.http.HttpReporter;
-
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-import app.wgx.com.aiYa.assistTool.VariableTool;
+import app.wgx.com.aiYa.assistTool.DeviceTool;
+import app.wgx.com.aiYa.assistTool.NetWorkTool;
+import app.wgx.com.aiYa.bean.NetworkStateInfo;
+import app.wgx.com.aiYa.commonTool.HttpConstant;
 import okhttp3.OkHttpClient;
 /**
  * Create view by wgx
@@ -27,13 +27,35 @@ import okhttp3.OkHttpClient;
  * Create at 2016/8/16 11:34
  */
 public class MyApplication extends Application {
+    public static Context mContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
+        initNetwork();
         initOkGo();
     }
 
+    /**
+     * 判断网络
+     */
+    private void initNetwork(){
+        if (NetWorkTool.isNetworkAvailable(mContext)){
+            NetworkStateInfo.getInstance().setConnected(true);
+            if (NetWorkTool.isMobileConnected(mContext)){
+                NetworkStateInfo.getInstance().setMobile(true);
+                NetworkStateInfo.getInstance().setWifi(false);
+            }else if (NetWorkTool.isWifiConnected(mContext)){
+                NetworkStateInfo.getInstance().setMobile(false);
+                NetworkStateInfo.getInstance().setWifi(true);
+            }
+        }else {
+            NetworkStateInfo.getInstance().setConnected(false);
+            NetworkStateInfo.getInstance().setMobile(false);
+            NetworkStateInfo.getInstance().setWifi(false);
+        }
+    }
 
     /**
      * 初始化网络框架
@@ -44,8 +66,9 @@ public class MyApplication extends Application {
         headers.put("commonHeaderKey1", "commonHeaderValue1");    //header不支持中文，不允许有特殊字符
         headers.put("commonHeaderKey2", "commonHeaderValue2");
         HttpParams params = new HttpParams();
-        params.put("commonParamsKey1", "commonParamsValue1");     //param支持中文,直接传,不要自己编码
-        params.put("commonParamsKey2", "这里支持中文参数");
+        params.put("packageName", DeviceTool.getAppName(mContext));     //param支持中文,直接传,不要自己编码
+        params.put("mac", DeviceTool.getMacAddress(mContext));
+        params.put("appKey", HttpConstant.API_KEY);
         //----------------------------------------------------------------------------------------//
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -75,30 +98,6 @@ public class MyApplication extends Application {
                 .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
                 .addCommonHeaders(headers)                      //全局公共头
                 .addCommonParams(params);                       //全局公共参数
-    }
-
-    private void initCrashReport() {
-        LogReport.getInstance()
-                .setCacheSize(30 * 1024 * 1024)//支持设置缓存大小，超出后清空
-                .setLogDir(getApplicationContext(), VariableTool.LOG_SAVE_DIRECTORY)//定义log路径
-                .setWifiOnly(false)//设置只在Wifi状态下上传，设置为false为Wifi和移动网络都上传
-                .setLogSaver(new CrashWriter(getApplicationContext()))//支持自定义保存崩溃信息的样式
-                //.setEncryption(new AESEncode()) //支持日志到AES加密或者DES加密，默认不开启
-                .init(getApplicationContext());
-      //  initHttpReporter();
-    }
-    /**
-     * 使用HTTP发送日志
-     */
-    private void initHttpReporter() {
-        HttpReporter http = new HttpReporter(this);
-        http.setUrl("http://crashreport.jd-app.com/your_receiver");//发送请求的地址
-        http.setFileParam("fileName");//文件的参数名
-        http.setToParam("to");//收件人参数名
-        http.setTo("你的接收邮箱");//收件人
-        http.setTitleParam("subject");//标题
-        http.setBodyParam("message");//内容
-        LogReport.getInstance().setUploadType(http);
     }
 
 }

@@ -3,6 +3,8 @@ package app.wgx.com.aiYa.assistTool;
 
 import com.orhanobut.logger.Logger;
 
+import app.wgx.com.aiYa.MyApplication;
+
 /**
  * Create view by wgx
  *
@@ -16,7 +18,7 @@ public class MyLogger {
 
     {
         if (debugFlag)
-            Logger.init(DeviceTool.getAppName());
+            Logger.init(DeviceTool.getAppName(MyApplication.mContext));
     }
 
     public static void w(String msg) {

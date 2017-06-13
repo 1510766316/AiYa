@@ -18,14 +18,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+
 import app.wgx.com.aiYa.R;
 import app.wgx.com.aiYa.activities.BaseActivity;
 import app.wgx.com.aiYa.activities.main.presenter.MainPresenter;
-import app.wgx.com.aiYa.activities.main.view.Main;
+import app.wgx.com.aiYa.activities.main.model.MainModel;
 import app.wgx.com.aiYa.fragments.main.HomeFragment;
 import app.wgx.com.aiYa.fragments.main.JokeFragment;
 import app.wgx.com.aiYa.fragments.main.MenuFragment;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -35,7 +38,7 @@ import butterknife.OnClick;
  * <p>
  * Create at 2016/8/16 11:32
  */
-public class MainActivity extends BaseActivity implements Main,NavigationView.OnNavigationItemSelectedListener  {
+public class MainModelActivity extends BaseActivity implements MainModel,NavigationView.OnNavigationItemSelectedListener  {
     Resources resources;
     @BindView(R.id.home_image)
     ImageView homeImage;
@@ -66,12 +69,15 @@ public class MainActivity extends BaseActivity implements Main,NavigationView.On
     MainPresenter mainPresenter;
 
     @Override
-    protected void loadLayout(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        initView();
+        setListener();
     }
 
-    @Override
-    protected void initView() {
+    private void initView() {
         setSupportActionBar(mToolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, 0, 0);
@@ -90,8 +96,7 @@ public class MainActivity extends BaseActivity implements Main,NavigationView.On
         showModule(0);
     }
 
-    @Override
-    protected void setListener() {
+    private void setListener() {
 
     }
 
@@ -228,5 +233,11 @@ public class MainActivity extends BaseActivity implements Main,NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkGo.getInstance().cancelTag(this);
     }
 }
